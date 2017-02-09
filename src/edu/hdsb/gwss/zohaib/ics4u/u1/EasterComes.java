@@ -34,7 +34,7 @@ public class EasterComes {
                          "----------------------- \n");
         
         //Prompt for User to enter data
-        System.out.println("Enter the year : ");
+        System.out.print("Enter the year : ");
         year = input.nextInt();
 
         //Calculations
@@ -69,9 +69,9 @@ public class EasterComes {
         day = p + 1;
 
         //Tells the user the day and month of easter
-        System.out.println("Easter day is"
+        System.out.print("Easter day is"
                 + " in the month : " + month
-                + "\n" + "Day of easter : " + day);
+                + "\n" + "Day of easter : " + day +"\n");
 
     }
 
