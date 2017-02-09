@@ -22,20 +22,47 @@ public class DistanceCalculator {
         Scanner input = new Scanner(System.in);
 
         //Constants
-        double Erad = 57.29577951;
+        //To convert degrees to radians divide by 180/pi
+        double Rrad = 180 / Math.PI;
+
+        //Earth Radius
+        double Erad = 6378.8;
 
         //Variables
-        double radDis, degDis ;
-    
-    //Prompts for place one and 2 
-    System.out.println("Enter place 1 :");
-    double place1 = Double.parseDouble(input.nextLine());
-    
-    System.out.println("Enter place 2 :");
-    double place2 = Double.parseDouble(input.nextLine());
-    
-    
+        double longtitudeone, latitudeone, longtitudetwo, latitudetwo, greatDistance;
+        String placeone, placetwo;
 
+        //Prompts for place one and place two 
+        System.out.print("Enter place one :    ");
+        placeone = input.nextLine();
+
+        System.out.print("Enter the latitude of " + placeone + " :   ");
+        latitudeone = Double.parseDouble(input.nextLine());
+        
+
+        System.out.print("Enter the longtitude of " + placeone + " :  ");
+        longtitudeone = Double.parseDouble(input.nextLine());
+
+        System.out.println("------------------------------------------");
+
+        System.out.print("Enter place two :");
+        placetwo = input.nextLine();
+
+        System.out.print("Enter the latitude of " + placetwo + " : ");
+        latitudetwo = Double.parseDouble(input.nextLine());
+
+        System.out.print("Enter the longtitude of " + placetwo + " : ");
+        longtitudetwo = Double.parseDouble(input.nextLine());
+        
+         System.out.println("------------------------------------------");
+
+        //Calculations
+        greatDistance = Erad * Math.acos( Math.sin(latitudeone/Rrad) * Math.sin(latitudetwo/Rrad)
+                + Math.cos(latitudeone/Rrad) * Math.cos(latitudetwo/Rrad)
+                * Math.cos((longtitudetwo/Rrad) - (longtitudeone)/Rrad) );
+
+        //Great Distance Displayed
+        System.out.println("Therefore the Distance is " + greatDistance);
     }
 
 }
