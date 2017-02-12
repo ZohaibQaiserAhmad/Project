@@ -40,11 +40,10 @@ public class Palindrome {
 
         //Intro
         System.out.print("Words that are the same forwards and backwards are called palindromes."
-                
                 + " \n This program determines if a words is a palindrome. \n");
-        
+
         System.out.println("----------------------------------------------------------------------------- ");
-        
+
         System.out.print("Enter a word : ");
 
         word = userInput.nextLine();
@@ -72,13 +71,12 @@ public class Palindrome {
 
             System.out.println(word + " is not " + word + " backwards and therefore"
                     + " is not a palindrome");
-            
 
         } else {
 
             System.out.print(word + "  is " + word + " backwards ");
 
-            System.out.println(word + "and therefore is a palindrome");
+            System.out.println(word + " and therefore is a palindrome");
 
         }
 
