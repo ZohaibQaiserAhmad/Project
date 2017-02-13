@@ -30,8 +30,6 @@ public class Palindrome2 {
         //Variables
         String sentence;
 
-        String word;
-
         int count = 0;
 
         //Intro
