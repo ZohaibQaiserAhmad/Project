@@ -28,43 +28,46 @@ public class RottenTomatoesP1 {
         //Objects
 
         Scanner input = new Scanner(System.in);
-        
+
         Scanner fileReader = new Scanner(new FileReader("MovieReviews.txt"));
 
         //Variables
         String word;
-        
+
         int repeat;
-        
-        double moviereview;
-        
+
+        double moviereview, moviereviewaverage;
+
         String line = fileReader.nextLine();
 
         //Intro
         System.out.println("Movie Reviews \n"
                 + "--------------------------------------------------------");
-        
+
         System.out.print("Enter a word : ");
-        
+
         word = input.nextLine();
-        
+
         repeat = 0;
 
         // Loop
         while (fileReader.hasNext()) {
-            
+
             if (fileReader.next().toUpperCase().equals(word.toUpperCase())) {
                 repeat++;
-               // fileReader.index(0);
+                
+                //moviereview = fileReader.;
+
+               // moviereviewaverage = (moviereview++) / repeat;
+
             }
-            
+
         }
-        
+
         //Calculation for average 
-        
         System.out.println("The word " + " ' " + word + " ' " + " repeats " + repeat
                 + " times");
-        
+
     }
-    
+
 }
