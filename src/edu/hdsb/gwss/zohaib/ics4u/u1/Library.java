@@ -10,6 +10,10 @@
  */
 package edu.hdsb.gwss.zohaib.ics4u.u1;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
+
 /**
  *
  * @author Zohaib-PC
@@ -47,8 +51,51 @@ public class Library {
         } else {
             System.out.println(word);
             return true;
-            
+
         }
+
+    }
+
+    //review method (part one)
+    public static void moviereview(String word) throws FileNotFoundException {
+
+        //Objects
+        Scanner fileReader = new Scanner(new FileReader("MovieReviews.txt"));
+
+        //variables
+        int repeat = 0;
+
+        int moviereview = 0;
+
+        double moviereviewaverage = 0;
+
+        String wordfile;
+
+        // Loop
+        while (fileReader.hasNext()) {
+
+            wordfile = fileReader.nextLine();
+
+            if (wordfile.toUpperCase().contains(word.toUpperCase())) {
+                repeat++;
+
+                moviereview = fileReader.nextInt();
+
+                moviereviewaverage += moviereview;
+
+            }
+
+        }
+
+        //Calculation for average
+        moviereviewaverage = (moviereviewaverage) / repeat;
+
+        System.out.println("The word " + " ' " + word + " ' " + " repeats " + repeat
+                + " times");
+
+        System.out.println("The average score for reviews containing the word " + word
+                + " is "
+                + moviereviewaverage);
 
     }
 }

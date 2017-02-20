@@ -15,10 +15,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-/**
- *
- * @author 1ahmadzoh
- */
 public class RottenTomatoesP1 {
 
     /**
@@ -31,14 +27,18 @@ public class RottenTomatoesP1 {
 
         Scanner fileReader = new Scanner(new FileReader("MovieReviews.txt"));
 
+        Scanner negReader = new Scanner(new FileReader("NegativeReview.txt"));
+
+        Scanner wordReader = new Scanner(new FileReader("WordList.txt"));
+
         //Variables
-        String word;
+        String word, wordfile, file;
 
-        int repeat;
+        int repeat = 0;
 
-        double moviereview, moviereviewaverage;
+        int moviereview = 0;
 
-        String line = fileReader.nextLine();
+        double moviereviewaverage = 0;
 
         //Intro
         System.out.println("Movie Reviews \n"
@@ -48,26 +48,44 @@ public class RottenTomatoesP1 {
 
         word = input.nextLine();
 
-        repeat = 0;
-
         // Loop
         while (fileReader.hasNext()) {
 
-            if (fileReader.next().toUpperCase().equals(word.toUpperCase())) {
-                repeat++;
-                
-                //moviereview = fileReader.;
+            wordfile = fileReader.nextLine();
 
-               // moviereviewaverage = (moviereview++) / repeat;
+            if (wordfile.toUpperCase().contains(word.toUpperCase())) {
+                repeat++;
+
+                moviereview = fileReader.nextInt();
+
+                moviereviewaverage += moviereview;
 
             }
 
         }
 
-        //Calculation for average 
+        //Calculation for average
+        moviereviewaverage = (moviereviewaverage) / repeat;
+
         System.out.println("The word " + " ' " + word + " ' " + " repeats " + repeat
                 + " times");
 
-    }
+        System.out.println("The average score for reviews containing the word " + word
+                + " is "
+                + moviereviewaverage);
 
+        //Part Two
+        //Intro
+        /*  System.out.print("Enter the name of the file with words you want to find the average score for : ");
+
+        file = input.nextLine();
+
+        if (file.equals("negTest.txt")) {
+
+            String words = negReader.nextLine();
+
+            Library.moviereview(words);
+
+        } */
+    }
 }
