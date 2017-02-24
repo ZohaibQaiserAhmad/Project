@@ -32,13 +32,9 @@ public class RottenTomatoesP1 {
         Scanner wordReader = new Scanner(new FileReader("WordList.txt"));
 
         //Variables
-        String word, wordfile, file;
+        String word, file;
 
-        int repeat = 0;
-
-        int moviereview = 0;
-
-        double moviereviewaverage = 0;
+        double moviereviewaverage = 0, repeat = 0;
 
         //Intro
         System.out.println("Movie Reviews \n"
@@ -48,44 +44,43 @@ public class RottenTomatoesP1 {
 
         word = input.nextLine();
 
-        // Loop
-        while (fileReader.hasNext()) {
-
-            wordfile = fileReader.nextLine();
-
-            if (wordfile.toUpperCase().contains(word.toUpperCase())) {
-                repeat++;
-
-                moviereview = fileReader.nextInt();
-
-                moviereviewaverage += moviereview;
-
-            }
-
-        }
-
-        //Calculation for average
-        moviereviewaverage = (moviereviewaverage) / repeat;
-
-        System.out.println("The word " + " ' " + word + " ' " + " repeats " + repeat
-                + " times");
-
         System.out.println("The average score for reviews containing the word " + word
                 + " is "
-                + moviereviewaverage);
+                + Library.moviereview(word));
 
         //Part Two
         //Intro
-        /*  System.out.print("Enter the name of the file with words you want to find the average score for : ");
+        System.out.print("Enter the name of the file with words you want to find the average score for : ");
 
         file = input.nextLine();
 
         if (file.equals("negTest.txt")) {
 
-            String words = negReader.nextLine();
+            while (negReader.hasNext()) {
 
-            Library.moviereview(words);
+                repeat++;
 
-        } */
+                String words = negReader.nextLine();
+
+                moviereviewaverage += Library.moviereview(words);
+
+            }
+
+            moviereviewaverage = (moviereviewaverage) / repeat;
+
+            System.out.println(moviereviewaverage);
+
+            if (moviereviewaverage >= 2.01) {
+                System.out.println("The overall score of words in " + file + " is " + moviereviewaverage
+                        + " \n The overall sentiment of " + file + " is positive");
+            } else {
+                System.out.println("The overall score of words in " + file + " is " + moviereviewaverage
+                        + " \n The overall sentiment of " + file + " is negative");
+            }
+        }
+
+        //Part Three
+        //Intro
+        System.out.print("Enter the name of the file with words you want to score: ");
     }
 }

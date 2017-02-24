@@ -57,7 +57,7 @@ public class Library {
     }
 
     //review method (part one)
-    public static void moviereview(String word) throws FileNotFoundException {
+    public static double moviereview(String word) throws FileNotFoundException {
 
         //Objects
         Scanner fileReader = new Scanner(new FileReader("MovieReviews.txt"));
@@ -79,23 +79,19 @@ public class Library {
             if (wordfile.toUpperCase().contains(word.toUpperCase())) {
                 repeat++;
 
-                moviereview = fileReader.nextInt();
+                if (fileReader.hasNextInt()) {
 
-                moviereviewaverage += moviereview;
+                    moviereview = fileReader.nextInt();
 
+                    moviereviewaverage += moviereview;
+
+                }
             }
 
         }
 
         //Calculation for average
-        moviereviewaverage = (moviereviewaverage) / repeat;
-
-        System.out.println("The word " + " ' " + word + " ' " + " repeats " + repeat
-                + " times");
-
-        System.out.println("The average score for reviews containing the word " + word
-                + " is "
-                + moviereviewaverage);
+        return moviereviewaverage = (moviereviewaverage) / repeat;
 
     }
 }
