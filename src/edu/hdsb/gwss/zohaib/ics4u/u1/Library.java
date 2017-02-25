@@ -13,6 +13,8 @@ package edu.hdsb.gwss.zohaib.ics4u.u1;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.math.BigDecimal;
 
 /**
  *
@@ -57,15 +59,15 @@ public class Library {
     }
 
     //review method (part one)
-    public static double moviereview(String word) throws FileNotFoundException {
+    public static Double wordreview(String word) throws FileNotFoundException {
 
         //Objects
         Scanner fileReader = new Scanner(new FileReader("MovieReviews.txt"));
 
-        //variables
-        int repeat = 0;
+        //Variables
+        double repeat = 0;
 
-        int moviereview = 0;
+        double moviereview = 0;
 
         double moviereviewaverage = 0;
 
@@ -77,21 +79,54 @@ public class Library {
             wordfile = fileReader.nextLine();
 
             if (wordfile.toUpperCase().contains(word.toUpperCase())) {
-                repeat++;
 
-                if (fileReader.hasNextInt()) {
+                if (fileReader.hasNextDouble()) {
 
-                    moviereview = fileReader.nextInt();
+                    moviereview = fileReader.nextDouble();
 
-                    moviereviewaverage += moviereview;
+                    repeat++;
 
                 }
+                moviereviewaverage += moviereview;
             }
 
         }
 
         //Calculation for average
-        return moviereviewaverage = (moviereviewaverage) / repeat;
+        moviereviewaverage = (moviereviewaverage / repeat);
+
+        return moviereviewaverage;
 
     }
+
+    //Review method (part two)
+    public static double sentencereview(String file) throws FileNotFoundException {
+        //Object
+
+        Scanner negReader = new Scanner(new FileReader("NegativeReview.txt"));
+
+        //Variables
+        double moviereviewaverage = 0, repeat = 0;
+
+        String words;
+
+        if (file.equals("negTest.txt")) {
+
+            while (negReader.hasNext()) {
+
+                words = negReader.nextLine();
+
+                moviereviewaverage += Library.wordreview(words);
+
+                repeat++;
+
+            }
+
+            moviereviewaverage = (moviereviewaverage) / (repeat);
+
+         
+
+    }
+        return moviereviewaverage;
+}
 }
