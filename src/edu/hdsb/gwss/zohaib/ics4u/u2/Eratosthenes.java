@@ -32,23 +32,58 @@ public class Eratosthenes {
     public static void main(String[] args) {
         //Array
         ArrayList numbers = new ArrayList();
+        ArrayList evenNumbertoremove = new ArrayList();
+        ArrayList oddNumbertoremove = new ArrayList();
 
-        for (int i = 0; i < 1000; i++) {
+        //Variable
+        //for statement
+        for (int i = 2; i < 1000; i++) {
             numbers.add(i);
 
-            if (i % 10 == 0) {
-                numbers.add("\n");
+        }
+
+        for (int i = 2; i < 1000; i = i + 2) {
+
+            int one = i + 1;
+
+            int two = i + 2;
+
+            int five = i + 5;
+
+            int seven = i + 7;
+
+            if (two % 2 == 0) {
+
+                evenNumbertoremove.add(two);
+
+            }
+
+            if (one % 3 == 0 && one > 3) {
+
+                oddNumbertoremove.add(one);
+
+            }
+
+            if (five % 5 == 0 && five > 5) {
+
+                oddNumbertoremove.add(five);
+
+            }
+
+            if (seven % 7 == 0 && seven > 7) {
+
+                oddNumbertoremove.add(seven);
 
             }
 
         }
+        numbers.removeAll(evenNumbertoremove);
+        numbers.removeAll(oddNumbertoremove);
+        
+        
 
-        for (int i = 0; i < numbers.size(); i++) {
-            
+        System.out.println(numbers);
 
-        }
-
-        System.out.print(numbers);
     }
 
 }
