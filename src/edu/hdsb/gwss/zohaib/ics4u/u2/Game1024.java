@@ -19,7 +19,7 @@ public class Game1024 extends javax.swing.JFrame {
     private int[][] squareValues;
 
     //Variables
-    int score;
+    private int score;
 
     /**
      * Creates new form Game1024
@@ -29,17 +29,24 @@ public class Game1024 extends javax.swing.JFrame {
 
         //Put JLabels in the 2D Array
         squaresLabels = new JLabel[4][4];
+        squareValues = new int[4][4];
 
         squaresLabels[0][0] = jLabel00;
         squaresLabels[0][1] = jLabel01;
         squaresLabels[0][2] = jLabel02;
         squaresLabels[0][3] = jLabel03;
+
+        squaresLabels[1][0] = jLabel10;
         squaresLabels[1][1] = jLabel11;
         squaresLabels[1][2] = jLabel12;
         squaresLabels[1][3] = jLabel13;
+
+        squaresLabels[2][0] = jLabel20;
         squaresLabels[2][1] = jLabel21;
         squaresLabels[2][2] = jLabel22;
         squaresLabels[2][3] = jLabel23;
+
+        squaresLabels[3][0] = jLabel30;
         squaresLabels[3][1] = jLabel31;
         squaresLabels[3][2] = jLabel32;
         squaresLabels[3][3] = jLabel33;
@@ -63,12 +70,19 @@ public class Game1024 extends javax.swing.JFrame {
 
         }
 
+        //3. Place two random
+        placeRandomTwo();
+        placeRandomTwo();
+
+        refreshTiles();
+
     }
 
+    //4. Display
     private void placeRandomTwo() {
         //Variables
-        int row;
-        int col;
+        int row = 0;
+        int col = 0;
         boolean placed = false;
 
         while (!placed) {
@@ -78,9 +92,14 @@ public class Game1024 extends javax.swing.JFrame {
 
             if (squareValues[row][col] == 0) {
 
-                squareValues[row][col] = 2;
+                squaresLabels[row][col].setText("");
                 placed = true;
 
+            } else {
+                
+                squaresLabels[row][col].setText("" + squareValues[row][col]);
+                
+                
             }
 
         }
@@ -96,22 +115,42 @@ public class Game1024 extends javax.swing.JFrame {
 
                 //Check to see if its zero
                 if (squareValues[row][col] == 0) {
-                    
+
                     squaresLabels[row][col].setText("");
-                    
-                    
+
                 } else {
-                    
-                    
+
                     squaresLabels[row][col].setText("" + squareValues[row][col]);
-                    
-                    
+
                 }
 
             }
 
         }
 
+    }
+
+    private void slideRight() {
+        //For Each Row
+        for (int r = 0; r < squareValues.length; r++) {
+
+            //Pass for "Bubble" Sort
+            for (int pass = 0; pass < squareValues[r].length - 1; pass++) {
+
+                //For the second last Column 
+                for (int c = squareValues[r].length - 2; c >= 0 + pass; c++) {
+
+                    //Is the right empty
+                    if (squareValues[r][c] != 0 && squareValues[r][c + 1] == 0) {
+
+                        //  swap(r, c, r, c + 1);
+                    }
+
+                }
+
+            }
+
+        }
     }
 
     /**
