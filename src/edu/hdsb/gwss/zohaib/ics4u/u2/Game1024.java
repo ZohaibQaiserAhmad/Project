@@ -5,6 +5,7 @@
  */
 package edu.hdsb.gwss.zohaib.ics4u.u2;
 
+import edu.hdsb.gwss.zohaib.ics4u.u1.Library;
 import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
 
@@ -76,6 +77,7 @@ public class Game1024 extends javax.swing.JFrame {
 
         refreshTiles();
 
+        slideRight();
     }
 
     //4. Display
@@ -90,16 +92,17 @@ public class Game1024 extends javax.swing.JFrame {
             row = (int) ((Math.random()) * squareValues.length);
             col = (int) ((Math.random()) * squareValues.length);
 
+            System.out.println("");
+
             if (squareValues[row][col] == 0) {
 
-                squaresLabels[row][col].setText("");
+                squareValues[row][col] = 2;
                 placed = true;
 
             } else {
-                
+
                 squaresLabels[row][col].setText("" + squareValues[row][col]);
-                
-                
+
             }
 
         }
@@ -111,8 +114,6 @@ public class Game1024 extends javax.swing.JFrame {
 
             for (int col = 0; col < squareValues[row].length; col++) {
 
-                squareValues[row][col] = 0;
-
                 //Check to see if its zero
                 if (squareValues[row][col] == 0) {
 
@@ -120,7 +121,9 @@ public class Game1024 extends javax.swing.JFrame {
 
                 } else {
 
-                    squaresLabels[row][col].setText("" + squareValues[row][col]);
+                    squaresLabels[row][col].setText(" " + squareValues[row][col]);
+
+                    System.out.println("" + squareValues[row][col]);
 
                 }
 
@@ -138,12 +141,12 @@ public class Game1024 extends javax.swing.JFrame {
             for (int pass = 0; pass < squareValues[r].length - 1; pass++) {
 
                 //For the second last Column 
-                for (int c = squareValues[r].length - 2; c >= 0 + pass; c++) {
+                for (int c = squareValues[r].length - 2; c >= (0 + pass); c++) {
 
                     //Is the right empty
                     if (squareValues[r][c] != 0 && squareValues[r][c + 1] == 0) {
 
-                        //  swap(r, c, r, c + 1);
+                        Library.swap(squareValues, r, c, r, r + 1);
                     }
 
                 }
@@ -192,7 +195,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel00.setBackground(new java.awt.Color(153, 204, 0));
         jLabel00.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel00.setForeground(new java.awt.Color(204, 153, 0));
         jLabel00.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel00.setText("00");
         jLabel00.setOpaque(true);
@@ -200,7 +202,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel20.setBackground(new java.awt.Color(153, 204, 0));
         jLabel20.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(204, 153, 0));
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("20");
         jLabel20.setOpaque(true);
@@ -208,7 +209,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel10.setBackground(new java.awt.Color(153, 204, 0));
         jLabel10.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(204, 153, 0));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("10");
         jLabel10.setOpaque(true);
@@ -216,7 +216,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel30.setBackground(new java.awt.Color(153, 204, 0));
         jLabel30.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel30.setForeground(new java.awt.Color(204, 153, 0));
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel30.setText("30");
         jLabel30.setOpaque(true);
@@ -224,7 +223,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel01.setBackground(new java.awt.Color(153, 204, 0));
         jLabel01.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel01.setForeground(new java.awt.Color(204, 153, 0));
         jLabel01.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel01.setText("01");
         jLabel01.setOpaque(true);
@@ -232,7 +230,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel11.setBackground(new java.awt.Color(153, 204, 0));
         jLabel11.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(204, 153, 0));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("11");
         jLabel11.setOpaque(true);
@@ -240,7 +237,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel21.setBackground(new java.awt.Color(153, 204, 0));
         jLabel21.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(204, 153, 0));
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("21");
         jLabel21.setOpaque(true);
@@ -248,7 +244,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel31.setBackground(new java.awt.Color(153, 204, 0));
         jLabel31.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel31.setForeground(new java.awt.Color(204, 153, 0));
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel31.setText("31");
         jLabel31.setOpaque(true);
@@ -256,7 +251,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel12.setBackground(new java.awt.Color(153, 204, 0));
         jLabel12.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(204, 153, 0));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("12");
         jLabel12.setOpaque(true);
@@ -264,7 +258,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel22.setBackground(new java.awt.Color(153, 204, 0));
         jLabel22.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(204, 153, 0));
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("22");
         jLabel22.setOpaque(true);
@@ -272,7 +265,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel02.setBackground(new java.awt.Color(153, 204, 0));
         jLabel02.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel02.setForeground(new java.awt.Color(204, 153, 0));
         jLabel02.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel02.setText("02");
         jLabel02.setOpaque(true);
@@ -280,7 +272,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel32.setBackground(new java.awt.Color(153, 204, 0));
         jLabel32.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel32.setForeground(new java.awt.Color(204, 153, 0));
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel32.setText("32");
         jLabel32.setOpaque(true);
@@ -288,7 +279,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel03.setBackground(new java.awt.Color(153, 204, 0));
         jLabel03.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel03.setForeground(new java.awt.Color(204, 153, 0));
         jLabel03.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel03.setText("03");
         jLabel03.setOpaque(true);
@@ -296,7 +286,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel13.setBackground(new java.awt.Color(153, 204, 0));
         jLabel13.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(204, 153, 0));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("13");
         jLabel13.setOpaque(true);
@@ -304,7 +293,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel23.setBackground(new java.awt.Color(153, 204, 0));
         jLabel23.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(204, 153, 0));
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("23");
         jLabel23.setOpaque(true);
@@ -312,7 +300,6 @@ public class Game1024 extends javax.swing.JFrame {
 
         jLabel33.setBackground(new java.awt.Color(153, 204, 0));
         jLabel33.setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(204, 153, 0));
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel33.setText("33");
         jLabel33.setOpaque(true);

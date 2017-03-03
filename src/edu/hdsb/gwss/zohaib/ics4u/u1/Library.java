@@ -241,34 +241,34 @@ public class Library {
             wordArray = new double[44];
 
             wordArrays = new String[44];
-            
+
             //While file has a next line do this
             while (wordReader.hasNext()) {
-                
+
                 //word is equal to file next line
                 word = wordReader.nextLine();
-                
+
                 //word is equal to word but lower cased
                 word = word.toLowerCase();
-                
+
                 //retain original value of word before its changed
                 originalword = word;
-                
+
                 //Creates array to store values of orginal word and word
                 wordArrays[repeat] = originalword;
 
                 wordArray[repeat] = Library.wordreview(word);
-                
+
                 //every time the file has a token add one to repeat
                 repeat++;
 
             }
-            
+
             //Sorts the values gained from while loop from least to greatest
             Arrays.sort(wordArray);
 
             Arrays.sort(wordArrays);
-            
+
             //Prints out the information user wants
             System.out.println(" The most positive word , with a score of  " + wordArray[(wordArray.length) - 1] + " is "
                     + wordArrays[(wordArray.length) - 1] + " \n The most negative word , with a score of  " + wordArray[0] + " is "
@@ -276,6 +276,50 @@ public class Library {
 
         }
 
+    }
+
+    //bubbleSort(Ascending)
+    public static void bubbleSortAscending(int data[]) {
+
+        int swaps = 0;
+        int comp = 0;
+
+        for (int pass = 0; pass < data.length - 1; pass++) {
+
+            for (int i = 0; i < data.length - 1 - pass; i++) {
+
+                comp++;
+
+                if (data[i] > data[i + 1]) {
+
+                    // SWITCH
+                    swap(data, i, i + 1);
+
+                    swaps++;
+                }
+            }
+            //
+        }
+        System.out.println("SWAPS: " + swaps + " COMP: " + comp);
+    }
+
+    //Swap
+    public static void swap(int[] data, int i, int j) {
+
+        int tmp = data[j];
+
+        data[j] = data[i];
+
+        data[i] = tmp;
+    }
+    
+    public static void swap(int[][] data, int r1, int c1, int r2, int c2) {
+
+        int tmp = data[r1][c1];
+
+        data[r1][c1] = data[r2][c2];
+
+        data[r2][c2] = tmp;
     }
 
 }
