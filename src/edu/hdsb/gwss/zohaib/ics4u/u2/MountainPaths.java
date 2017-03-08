@@ -21,35 +21,8 @@ public class MountainPaths {
         // 
         System.out.println("TASK 1: READ DATA");
         int[][] data = read("Colorado.844x480.dat");
-        System.out.println("TASK 1: READ DATA");
-        //Variables
-        int row = 0;
-        int col = 0;
-        // TODO
-        Scanner file = new Scanner(".\\data\\mountain.paths\\Colorado.480x480.dat");
-        
-        
-        String line = file.nextLine();
-        
-        StringTokenizer st = new StringTokenizer(line);
-        
-        while(st.hasMoreTokens()){
-            
-            col++;
-            
-        }
-        
-        while (file.hasNextLine()) {
 
-            row++;
-
-        }
-        
-        data = new int[col][row];
-        
-        System.out.println(data);
-        
-
+//        // TODO
 //        // ***********************************
 //        // Construct DrawingPanel, and get its Graphics context
 //        //
@@ -101,32 +74,54 @@ public class MountainPaths {
 //        g.setColor( Color.GREEN ); //set brush to green for drawing best path
 //        totalChange = drawLowestElevPath( g, data, bestRow );
 //        System.out.println( "\tThe Lowest-Elevation-Change Path starts at row: " + bestRow + " and gives a total change of: " + totalChange );
+        /**
+         * This method reads a 2D data set from the specified file. The
+         * Graphics' industry standard is width by height (width x height),
+         * while programmers use rows x cols / (height x width).
+         *
+         * @param fileName the name of the file
+         * @return a 2D array (rows x cols) of the data from the file read
+         */
     }
 
-    /**
-     * This method reads a 2D data set from the specified file. The Graphics'
-     * industry standard is width by height (width x height), while programmers
-     * use rows x cols / (height x width).
-     *
-     * @param fileName the name of the file
-     * @return a 2D array (rows x cols) of the data from the file read
-     */
     public static int[][] read(String fileName) {
-        int[][] data = null;
+        int[][] data;
 
         //Variables
         int row = 0;
         int col = 0;
         // TODO
+
         Scanner file = new Scanner(".\\data\\mountain.paths\\Colorado.480x480.dat");
 
-        while (file.hasNextLine()) {
+        String line = file.nextLine();
+        StringTokenizer st = new StringTokenizer(line);
 
+        while (file.hasNextLine()) {
+            file.nextLine();
             row++;
 
         }
 
+        while (st.hasMoreTokens()) {
+            st.nextToken();
+            col++;
+
+        }
+        data = new int[col][row];
+
+        for (int x = 0; x < row; x++) {
+
+            for (int y = 0; y < col; y++) {
+
+                data[x][y] = (int) st.nextElement();
+
+            }
+
+        }
+
         return data;
+
     }
 
     /**
