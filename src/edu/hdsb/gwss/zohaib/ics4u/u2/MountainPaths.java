@@ -24,8 +24,8 @@ public class MountainPaths {
 
 //        // TODO
 //        // ***********************************
-//        // Construct DrawingPanel, and get its Graphics context
-//        //
+//        Construct DrawingPanel, and get its Graphics context
+//        
 //        DrawingPanel panel = new DrawingPanel( data[0].length, data.length );
 //        Graphics g = panel.getGraphics();
 //
@@ -85,30 +85,32 @@ public class MountainPaths {
     }
 
     public static int[][] read(String fileName) {
-        int[][] data;
+        int[][] data = null;
+
+        Scanner file = new Scanner(fileName);
 
         //Variables
         int row = 0;
-        int col = 0;
+        int col;
+       
+
         // TODO
-
-        Scanner file = new Scanner(".\\data\\mountain.paths\\Colorado.480x480.dat");
-
         String line = file.nextLine();
+
         StringTokenizer st = new StringTokenizer(line);
 
+        col = st.countTokens();
+       
+
         while (file.hasNextLine()) {
-            file.nextLine();
+
             row++;
 
-        }
-
-        while (st.hasMoreTokens()) {
-            st.nextToken();
-            col++;
+            file.nextLine();
 
         }
-        data = new int[col][row];
+
+        System.out.println(col + " " + row);
 
         for (int x = 0; x < row; x++) {
 
