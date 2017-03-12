@@ -24,26 +24,26 @@ public class MountainPaths {
 
 //        // TODO
 //        // ***********************************
-//        Construct DrawingPanel, and get its Graphics context
+        // Construct DrawingPanel, and get its Graphics context
 //        
-//        DrawingPanel panel = new DrawingPanel( data[0].length, data.length );
-//        Graphics g = panel.getGraphics();
+        DrawingPanel panel = new DrawingPanel(data[0].length, data.length);
+        Graphics g = panel.getGraphics();
 //
 //        // ***********************************
 //        // TASK 2:  find HIGHEST & LOWEST elevation; for GRAY SCALE
-//        //
-//        System.out.println( "TASK 2: HIGHEST / LOWEST ELEVATION" );
-//        int min = findMinValue( data );
-//        System.out.println( "\tMin: " + min );
-//
-//        int max = findMaxValue( data );
-//        System.out.println( "\tMax: " + max );
+//       
+        System.out.println("TASK 2: HIGHEST / LOWEST ELEVATION");
+        int min = findMinValue(data);
+        System.out.println("\tMin: " + min);
+
+        int max = findMaxValue(data);
+        System.out.println("\tMax: " + max);
 //
 //        // ***********************************
 //        // TASK 3:  Draw The Map
-//        //
-//        System.out.println( "TASK 3: DRAW MAP" );
-//        drawMap( g, data );
+
+        System.out.println("TASK 3: DRAW MAP");
+        drawMap(g, data);
 //
 //        // ***********************************
 //        // TASK 4:  implement indexOfMinInCol
@@ -84,15 +84,14 @@ public class MountainPaths {
          */
     }
 
-    public static int[][] read(String fileName) {
-        int[][] data = null;
+    public static int[][] read(String fileName) throws FileNotFoundException {
+        int[][] data;
 
-        Scanner file = new Scanner(fileName);
+        Scanner file = new Scanner(new File(fileName));
 
         //Variables
         int row = 0;
-        int col;
-       
+        int col = 0;
 
         // TODO
         String line = file.nextLine();
@@ -100,7 +99,6 @@ public class MountainPaths {
         StringTokenizer st = new StringTokenizer(line);
 
         col = st.countTokens();
-       
 
         while (file.hasNextLine()) {
 
@@ -110,13 +108,21 @@ public class MountainPaths {
 
         }
 
-        System.out.println(col + " " + row);
+        row = row + 1;
 
-        for (int x = 0; x < row; x++) {
+        data = new int[col][row];
 
-            for (int y = 0; y < col; y++) {
+        Scanner files = new Scanner(new File(fileName));
 
-                data[x][y] = (int) st.nextElement();
+        for (int i = 0; i < row; i++) {
+
+            for (int j = 0; j < col; j++) {
+
+                if (files.hasNextInt()) {
+
+                    data[j][i] = files.nextInt();
+
+                }
 
             }
 
@@ -133,7 +139,23 @@ public class MountainPaths {
     public static int findMinValue(int[][] grid) {
 
         // TODO
-        return -1;
+        int min = grid[0][0];
+
+        for (int j = 0; j < grid.length; j++) {
+
+            for (int i = 0; i < grid[j].length; i++) {
+
+                if (grid[j][i] < min) {
+
+                    min = grid[j][i];
+
+                }
+
+            }
+
+        }
+
+        return min;
 
     }
 
@@ -144,7 +166,23 @@ public class MountainPaths {
     public static int findMaxValue(int[][] grid) {
 
         // TODO
-        return -1;
+        int max = grid[0][0];
+
+        for (int j = 0; j < grid.length; j++) {
+
+            for (int i = 0; i < grid[j].length; i++) {
+
+                if (grid[j][i] > max) {
+
+                    max = grid[j][i];
+
+                }
+
+            }
+
+        }
+
+        return max;
 
     }
 
@@ -155,10 +193,32 @@ public class MountainPaths {
      * 0-255 you must find the min and max values in the original data first.
      *
      * @param g a Graphics context to use
+     * @param data
      * @param grid a 2D array of the data
      */
     public static void drawMap(Graphics g, int[][] data) {
         // TODO
+        int min = findMinValue(data);
+        int max = findMaxValue(data);
+
+        double scale = 255.0 / (max - min);
+
+        int[][] greyscale = new int[data.length][data[0].length];
+
+        for (int i = 0; i < data.length; i++) {
+
+            for (int j = 0; j < data[i].length; j++) {
+
+                greyscale[i][j] =  (int) ((data[i][j] - min) * scale);
+
+                int c = greyscale[i][j];
+
+                g.setColor(new Color(c, c, c));
+
+                g.fillRect(j, i, 1, 1);
+            }
+        }
+
     }
 
     /**
