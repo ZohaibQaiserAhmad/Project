@@ -47,18 +47,18 @@ public class MountainPaths {
 //
 //        // ***********************************
 //        // TASK 4:  implement indexOfMinInCol
-//        //
-//        System.out.println( "TASK 4: INDEX OF MIN IN COL 0" );
-//        int minRow = indexOfMinInCol( data, 0 );
-//        System.out.println( "\tRow with lowest Col 0 Value: " + minRow );
+
+        System.out.println("TASK 4: INDEX OF MIN IN COL 0");
+        int minRow = indexOfMinInCol(data, 0);
+        System.out.println("\tRow with lowest Col 0 Value: " + minRow);
 //
 //        // ***********************************
 //        // TASK 4:  use minRow as starting point to draw path
-//        //
-//        System.out.println( "TASK 5: PATH from LOWEST STARTING ELEVATION" );
-//        g.setColor( Color.RED );
-//        int totalChange = drawLowestElevPath( g, data, minRow ); //
-//        System.out.println( "\tLowest-Elevation-Change Path starting at row " + minRow + " gives total change of: " + totalChange );
+
+        System.out.println("TASK 5: PATH from LOWEST STARTING ELEVATION");
+        g.setColor(Color.RED);
+        int totalChange = drawLowestElevPath(g, data, minRow); //
+        System.out.println("\tLowest-Elevation-Change Path starting at row " + minRow + " gives total change of: " + totalChange);
 //
 //        // ***********************************
 //        // TASK 5:  determine the BEST path
@@ -90,8 +90,8 @@ public class MountainPaths {
         Scanner file = new Scanner(new File(fileName));
 
         //Variables
-        int row = 0;
-        int col = 0;
+        int row = 1;
+        int col;
 
         // TODO
         String line = file.nextLine();
@@ -108,9 +108,7 @@ public class MountainPaths {
 
         }
 
-        row = row + 1;
-
-        data = new int[col][row];
+        data = new int[row][col];
 
         Scanner files = new Scanner(new File(fileName));
 
@@ -120,7 +118,7 @@ public class MountainPaths {
 
                 if (files.hasNextInt()) {
 
-                    data[j][i] = files.nextInt();
+                    data[i][j] = files.nextInt();
 
                 }
 
@@ -141,16 +139,12 @@ public class MountainPaths {
         // TODO
         int min = grid[0][0];
 
-        for (int j = 0; j < grid.length; j++) {
+        for (int j = 0; j < grid[0].length; j++) {
 
-            for (int i = 0; i < grid[j].length; i++) {
-
-                if (grid[j][i] < min) {
-
-                    min = grid[j][i];
-
+            for (int[] grid1 : grid) {
+                if (grid1[j] < min) {
+                    min = grid1[j];
                 }
-
             }
 
         }
@@ -168,16 +162,12 @@ public class MountainPaths {
         // TODO
         int max = grid[0][0];
 
-        for (int j = 0; j < grid.length; j++) {
+        for (int j = 0; j < grid[0].length; j++) {
 
-            for (int i = 0; i < grid[j].length; i++) {
-
-                if (grid[j][i] > max) {
-
-                    max = grid[j][i];
-
+            for (int[] grid1 : grid) {
+                if (grid1[j] > max) {
+                    max = grid1[j];
                 }
-
             }
 
         }
@@ -194,7 +184,6 @@ public class MountainPaths {
      *
      * @param g a Graphics context to use
      * @param data
-     * @param grid a 2D array of the data
      */
     public static void drawMap(Graphics g, int[][] data) {
         // TODO
@@ -207,18 +196,18 @@ public class MountainPaths {
 
         for (int i = 0; i < data.length; i++) {
 
-            for (int j = 0; j < data[i].length; j++) {
+            for (int j = 0; j < data[0].length; j++) {
 
-                greyscale[i][j] =  (int) ((data[i][j] - min) * scale);
+                greyscale[i][j] = (int) (((data[i][j]) - min) * scale);
 
                 int c = greyscale[i][j];
 
                 g.setColor(new Color(c, c, c));
 
                 g.fillRect(j, i, 1, 1);
+
             }
         }
-
     }
 
     /**
@@ -226,12 +215,25 @@ public class MountainPaths {
      * contains the smallest value
      *
      * @param grid a 2D array
+     *
      * @col the column in the 2D array to process
      * @return the index of smallest value from grid at the given col
      */
     public static int indexOfMinInCol(int[][] grid, int col) {
         // TODO
-        return -1;
+        int min = grid[0][col];
+        int minRow = 0;
+        for (int i = 1; i < grid.length; i++) {
+
+            if (grid[i][col] < min) {
+
+                min = grid[i][col];
+                minRow = i;
+
+            }
+
+        }
+        return minRow;
     }
 
     /**
@@ -240,14 +242,93 @@ public class MountainPaths {
      * context
      *
      * @param g - the graphics context to use
-     * @param grid - the 2D array of elevation values
+     * @param data
      * @param row - the starting row for traversing to find the min path
      * @return total elevation of the route
      */
     public static int drawLowestElevPath(Graphics g, int[][] data, int row) {
 
         // TODO
-        return -1;
+        int forwardDiff, upDiff, downDiff;
+
+        int totalChange = 0;
+
+        int currentRow = 0;
+
+        int coinFlip = (int) ((Math.random() * 10) + 1);
+
+        for (row = 0; currentRow < data.length; currentRow++) {
+
+            for (int currentCol = 1; currentCol < data[0].length; currentCol++) {
+
+             
+
+               
+
+                if (Math.abs(data[row][currentCol++] - data[row][currentCol++]) < Math.abs(data[row][currentCol] - data[row--][currentCol++])) {
+                    if (Math.abs(data[row][currentCol++] - data[row][currentCol++]) < Math.abs(data[row][currentCol] - data[row++][currentCol++])) {
+
+                        
+                        currentCol++;
+
+                    } else {
+
+                       
+                        currentRow++;
+                        currentCol++;
+
+                    }
+
+                } else if (Math.abs(data[row][currentCol] - data[row--][currentCol++]) < Math.abs(data[row][currentCol++] - data[row][currentCol++])) {
+
+                    if (Math.abs(data[row][currentCol] - data[row--][currentCol++]) < Math.abs(data[row][currentCol] - data[row++][currentCol++])) {
+
+                        
+                        currentRow--;
+                        currentCol++;
+
+                    } else {
+
+                     
+                        currentRow++;
+                        currentCol++;
+
+                    }
+
+                } else if (Math.abs(data[row][currentCol++] - data[row][currentCol++]) 
+                        
+                        == Math.abs(data[row][currentCol] - data[row--][currentCol++]) || Math.abs(data[row][currentCol++] - data[row][currentCol++])
+                        
+                        == Math.abs(data[row][currentCol] - data[row++][currentCol++])) {
+
+                 
+                    currentCol++;
+
+                } else if ( Math.abs(data[row][currentCol] - data[row--][currentCol++]) == Math.abs(data[row][currentCol] - data[row++][currentCol++])) {
+
+                    if (coinFlip < 5) {
+
+                     
+                        currentRow--;
+                        currentCol++;
+
+                    } else {
+
+                     
+                        currentRow++;
+                        currentCol++;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        currentRow++;
+
+        return totalChange;
     }
 
     /**
