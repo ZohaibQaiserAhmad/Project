@@ -24,47 +24,55 @@ public class LetMeOut {
 
     /**
      * Display the current maze.
+     * @param row
+     * @param col
+     * @return 
      */
     public boolean findExitFrom(int row, int col) {
         boolean successful = false;
-
+        
+        //Check if you are at the exit
         if (maze[row][col] == EXIT) {
             
             maze[row][col] = GOOD_PATH;
             displayMaze();
-            successful = findExitFrom(row,col);
             successful = true;
+            return successful;
 
         }
         
         //Right
-        
+     
         if(maze[row][col + 1] == OPEN || maze[row][col + 1] == EXIT){
             
             successful = findExitFrom(row , col + 1);
-            
+           
         }
         
        
-        //Left
-        
-        if(maze[row][col - 1] == OPEN || maze[row][col - 1] == EXIT){
-            
-            successful = findExitFrom(row, col - 1);
-            
-        }
         
         //Down
-        if(maze[row - 1][col] == OPEN || maze[row][col] == EXIT){
+        if(maze[row++][col] == OPEN || maze[row++][col] == EXIT){
             
-            successful = findExitFrom(row - 1 , col - 1);
-            
+            successful = findExitFrom(row++ , col);
+          
         }
         
         //Up
-        if(maze[row++][col] == OPEN || maze[row++][col] == EXIT){
+        if(maze[row--][col] == OPEN || maze[row--][col] == EXIT){
             
-            successful = findExitFrom(row - 1 , col - 1);
+            successful = findExitFrom(row - 1 , col);
+          
+            
+        }
+        
+        
+        //Left
+        
+        if(maze[row][col --] == OPEN || maze[row][col --] == EXIT){
+            
+            successful = findExitFrom(row, col - 1);
+         
             
         }
         
