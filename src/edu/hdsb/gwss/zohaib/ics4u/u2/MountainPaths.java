@@ -1,7 +1,8 @@
 /*
  * Mountain Paths - Greedy Algorithm
- * Mr. Muir
- * 2017.01.24 - v1.0
+ * Zohaib Ahmad
+ *  Saturday , April 1st - v2.0
+
  */
 package edu.hdsb.gwss.zohaib.ics4u.u2;
 

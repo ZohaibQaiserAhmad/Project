@@ -1,5 +1,5 @@
 /*
- * Name:            Let Me Out
+ * Name: Zohaib Ahmad           Let Me Out
  * Date:            March, 2017
  */
 package edu.hdsb.gwss.zohaib.ics4u.u3;
@@ -34,9 +34,7 @@ public class LetMeOut {
         //Check if you are at the exit
         if (maze[row][col] == EXIT) {
             
-            maze[row][col] = GOOD_PATH;
-            displayMaze();
-            successful = true;
+           
             return successful;
 
         }
@@ -45,7 +43,8 @@ public class LetMeOut {
      
         if(maze[row][col + 1] == OPEN || maze[row][col + 1] == EXIT){
             
-            successful = findExitFrom(row , col + 1);
+            col++;
+            successful = findExitFrom(row , col);
            
         }
         
@@ -54,14 +53,16 @@ public class LetMeOut {
         //Down
         if(maze[row++][col] == OPEN || maze[row++][col] == EXIT){
             
-            successful = findExitFrom(row++ , col);
+            row ++;
+            successful = findExitFrom(row , col);
           
         }
         
         //Up
         if(maze[row--][col] == OPEN || maze[row--][col] == EXIT){
             
-            successful = findExitFrom(row - 1 , col);
+            row --;
+            successful = findExitFrom(row  , col);
           
             
         }
@@ -70,8 +71,8 @@ public class LetMeOut {
         //Left
         
         if(maze[row][col --] == OPEN || maze[row][col --] == EXIT){
-            
-            successful = findExitFrom(row, col - 1);
+            col--;
+            successful = findExitFrom(row, col);
          
             
         }
