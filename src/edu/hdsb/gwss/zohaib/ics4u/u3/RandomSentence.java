@@ -41,9 +41,22 @@ public class RandomSentence {
 
             String[] line = fileReader.nextLine().split(" ");
 
-            System.out.println(Arrays.toString(line));
+            for (int i = 0; i < line.length; i++) {
+
+                if (line[i].contentEquals("<")) {
+
+                    read.add(line[i].replaceAll(line[i], "<").replaceAll(line[i], ">"));
+                    read.add("\n");
+                }
+                
+                
+                System.out.println(read);
+                
+
+            }
 
         }
 
     }
+
 }

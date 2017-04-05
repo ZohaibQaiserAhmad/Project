@@ -32,58 +32,49 @@ public class LetMeOut {
     public boolean findExitFrom(int row, int col) {
         boolean successful = false;
 
-        //If it hits a wall
-        if (maze[row][col++] == WALL || maze[row][col] == WALL ) {
-
-            return false;
-
-        }
-
         //Check if you are at the exit
         if (maze[row][col] == EXIT) {
 
-            System.out.println(row + " " + col);
+            maze[row][col] = GOOD_PATH;
+            return true;
 
         }
 
-        //Right
-        if (maze[row][col + 1] == OPEN) {
+        maze[row][col] = TRIED;
 
-            maze[row][col++] = GOOD_PATH;
-            maze[row][col++] = TRIED;
-            successful = findExitFrom(row, col);
+        //Right
+        if (maze[row][col + 1] == EXIT || maze[row][col + 1] == OPEN) {
+
+            successful = findExitFrom(row, col + 1);
 
         }
 
         //Down
-        if (maze[row++][col] == OPEN) {
+        if (!successful && maze[row + 1][col] == EXIT || maze[row + 1][col] == OPEN) {
 
-            maze[row++][col] = GOOD_PATH;
-            maze[row++][col] = TRIED;
-            successful = findExitFrom(row, col);
-
-        }
-
-        //Up
-        if (maze[row--][col] == OPEN) {
-
-            maze[row--][col] = GOOD_PATH;
-            maze[row--][col] = TRIED;
-            successful = findExitFrom(row, col);
+            successful = findExitFrom(row + 1, col);
 
         }
 
         //Left
-        if (maze[row][col--] == OPEN) {
+        if (!successful && maze[row][col - 1] == EXIT || maze[row][col - 1] == OPEN) {
 
-            maze[row][col--] = GOOD_PATH;
-            maze[row][col--] = TRIED;
+            successful = findExitFrom(row, col - 1);
 
-            successful = findExitFrom(row, col);
+        }
+        
+        //Up
+        if (!successful && maze[row - 1][col] == EXIT || maze[row - 1][col] == OPEN) {
+
+            successful = findExitFrom(row - 1, col);
 
         }
 
-        return true;
+        if (successful) {
+            maze[row][col] = GOOD_PATH;
+        }
+
+        return successful;
 
     }
 
