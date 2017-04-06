@@ -13,7 +13,7 @@ package edu.hdsb.gwss.zohaib.ics4u.u3;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -30,33 +30,71 @@ public class RandomSentence {
         //Objects
 
         Scanner fileReader = new Scanner(new FileReader("Insult.g"));
-
+        HashMap<String,ArrayList<String>> grammar = new HashMap<>();
+        
         //Array
-        ArrayList<String> options = new ArrayList();
-
-        ArrayList<String> read = new ArrayList();
+//        ArrayList<String> options = new ArrayList();
+//
+//        ArrayList<String> read = new ArrayList();
 
         //Variables
-        while (fileReader.hasNext()) {
+        String line, tag;
+        
+        
+        while (fileReader.hasNextLine()) {
 
-            String[] line = fileReader.nextLine().split(" ");
-
-            for (int i = 0; i < line.length; i++) {
-
-                if (line[i].contentEquals("<")) {
-
-                    read.add(line[i].replaceAll(line[i], "<").replaceAll(line[i], ">"));
-                    read.add("\n");
-                }
+            line = fileReader.nextLine().trim();
+            
+            if( "{".equals(line) ) {
                 
+                tag = fileReader.nextLine();
+                System.out.println( "TAG FOUND:" + tag );
+          
                 
-                System.out.println(read);
-                
-
+                grammar.put( tag, getOptions( fileReader  ) );
             }
+
+//            for (int i = 0; i < line.length; i++) {
+//
+//                if (line[i].contains("<")) {
+//
+//                    while (!(line[i].contains("}"))) {
+//
+//                        options.add(line[i]);
+//
+//                        System.out.println(options);
+//
+//                    }
+//
+//                }
+//
+//            }
 
         }
 
     }
+    
+    public static ArrayList<String> getOptions( Scanner fileReader ) {
+        ArrayList<String> o = new ArrayList<>();
+        String line;
+        boolean done = false;
+        
+        while (!done) {
 
+            line = fileReader.nextLine().trim();
+            
+            if( "}".equals(line) ) {
+                done = true;
+            }
+            else {
+                o.add(line);
+                
+                System.out.println( "\t" + line );
+                
+            }
+        }
+        
+        return o;
+    }
+    
 }

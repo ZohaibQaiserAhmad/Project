@@ -1,6 +1,8 @@
 /*
  * Name: Zohaib Ahmad           Let Me Out
  * Date:            March, 2017
+ * V2
+ * Creating a path to the exit through recursion in a generated maze
  */
 package edu.hdsb.gwss.zohaib.ics4u.u3;
 
@@ -34,46 +36,57 @@ public class LetMeOut {
 
         //Check if you are at the exit
         if (maze[row][col] == EXIT) {
-
+            
+            //If maze at row and col is exit then it is apart of good path
             maze[row][col] = GOOD_PATH;
+            
+            //return true
             return true;
 
         }
-
+        
+        //If none of the statements worked then row and col is apart of tried
         maze[row][col] = TRIED;
 
-        //Right
+        //If statement for right : if maze at row and col to right is equal to exit and open do this
         if (maze[row][col + 1] == EXIT || maze[row][col + 1] == OPEN) {
-
+            
+            //successful  is equal to method at row and col to right (recursion)
             successful = findExitFrom(row, col + 1);
 
         }
 
-        //Down
+        //If statement for down : if maze at row -1 and same col is equal to exit and open do this
         if (!successful && maze[row + 1][col] == EXIT || maze[row + 1][col] == OPEN) {
-
+            
+            //successful is equal to method at row+1 and col (recursion)
             successful = findExitFrom(row + 1, col);
 
         }
 
-        //Left
+        //If statement for left : if maze at same row and col to left is equal to exit and open do this
         if (!successful && maze[row][col - 1] == EXIT || maze[row][col - 1] == OPEN) {
-
+            
+            //successful is equal to method at row , and col to left (recursion)
             successful = findExitFrom(row, col - 1);
 
         }
         
-        //Up
+        //If statement for  up : if maze and row above and same col is equal to exit and open do this
         if (!successful && maze[row - 1][col] == EXIT || maze[row - 1][col] == OPEN) {
-
+            
+            //successful is equal to row above and same col (recursion)
             successful = findExitFrom(row - 1, col);
 
         }
-
+        
+        //If successful do this
         if (successful) {
+            //Maze at row and col is apart of good path
             maze[row][col] = GOOD_PATH;
         }
-
+        
+        //return successful 
         return successful;
 
     }
