@@ -30,71 +30,80 @@ public class RandomSentence {
         //Objects
 
         Scanner fileReader = new Scanner(new FileReader("Insult.g"));
-        HashMap<String,ArrayList<String>> grammar = new HashMap<>();
-        
-        //Array
-//        ArrayList<String> options = new ArrayList();
-//
-//        ArrayList<String> read = new ArrayList();
+        HashMap<String, ArrayList<String>> grammar = new HashMap<>();
 
         //Variables
-        String line, tag;
-        
-        
+        String line, tag = null;
+
         while (fileReader.hasNextLine()) {
 
             line = fileReader.nextLine().trim();
-            
-            if( "{".equals(line) ) {
-                
-                tag = fileReader.nextLine();
-                System.out.println( "TAG FOUND:" + tag );
-          
-                
-                grammar.put( tag, getOptions( fileReader  ) );
-            }
 
-//            for (int i = 0; i < line.length; i++) {
-//
-//                if (line[i].contains("<")) {
-//
-//                    while (!(line[i].contains("}"))) {
-//
-//                        options.add(line[i]);
-//
-//                        System.out.println(options);
-//
-//                    }
-//
-//                }
-//
-//            }
+            if ("{".equals(line)) {
+
+                tag = fileReader.nextLine();
+
+                grammar.put(tag, getOptions(fileReader));
+            }
 
         }
 
+        System.out.println( Sentence(grammar) );
+
     }
-    
-    public static ArrayList<String> getOptions( Scanner fileReader ) {
+
+    public static ArrayList<String> getOptions(Scanner fileReader) {
         ArrayList<String> o = new ArrayList<>();
         String line;
         boolean done = false;
-        
+
         while (!done) {
 
             line = fileReader.nextLine().trim();
-            
-            if( "}".equals(line) ) {
+
+            if ("}".equals(line)) {
                 done = true;
-            }
-            else {
+            } else {
                 o.add(line);
-                
-                System.out.println( "\t" + line );
-                
+
             }
         }
-        
+
         return o;
     }
+
+    public static String Sentence(HashMap<String, ArrayList<String>> grammar) {
+
+        //Variable
+        String sentenceStarter = "<start>";
+        
+        int size = grammar.get(sentenceStarter).size();
+
+        String s = grammar.get(sentenceStarter).get(0);
+
+        return Sentence( grammar, s );
+
+    }
     
+    public static String Sentence(HashMap<String, ArrayList<String>> grammar, String s ) {
+
+        // BASE CASE: are they any tags left?
+        //  NO MORE; return s;
+        
+        
+        // MORE TAGS
+        //  - find the next tag
+        //  - go into grammar;  grammar.get(tag)
+        //  - how many options?
+        //  - generate random option
+        //  - get sub-sentence:  grammar.get(tag).get(randomnumber);
+        
+        // - replace tag with new sentence
+        //  s.replaceFirst( tag, newSentence );
+        // return Sentence( grammar, s )
+        
+        return null;
+
+    }
+
 }
