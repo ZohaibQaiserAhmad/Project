@@ -89,6 +89,13 @@ public class RandomSentence {
 
         // BASE CASE: are they any tags left?
         //  NO MORE; return s;
+        if(!(s.equals("<"))){
+            
+            
+            return s;
+            
+            
+        }
         
         
         // MORE TAGS
