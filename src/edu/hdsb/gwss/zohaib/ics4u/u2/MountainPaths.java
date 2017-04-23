@@ -74,9 +74,6 @@ public class MountainPaths {
         //Prints "Task 5 : Path from Lowest starting elevation "
         System.out.println("TASK 5: PATH from LOWEST STARTING ELEVATION");
 
-        //sets the color to red
-        g.setColor(Color.RED);
-
         //Sets variable "totalChange" to the value of the function drawLowestElevPath(g,data,minRow), where g is color we set (red) and data is data read from file and minRow is calculated using indexOfMinInCol
         int totalChange = drawLowestElevPath(g, data, minRow);
 
