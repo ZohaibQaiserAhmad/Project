@@ -4,14 +4,21 @@ import java.util.ArrayList;
 
 public class System {
 
-    //Constants
-    private static final int MINIMUM_YEAR_RELEASED = 1958;
-    private static final int MAXIMUM_YEAR_RELEASED = 2017;
+    //String
+    private String company;
+    private String console;
+    
+    
+    //Boolean
+    private boolean isConsole;
+    private boolean stillManufactured;
+    
+    //Int
+    private int yearReleased;
+
 
     private ArrayList<VideoGame> games;
 
     VideoGame game = new VideoGame();
-    
-  
 
 }

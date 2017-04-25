@@ -3,11 +3,11 @@ package edu.hdsb.gwss.zohaib.ics4u.u4;
 public class VideoGame {
 
     //Object
-    private System videoGame;
+    private System console;
 
     //String
     private String typeofGame;
-    private String NAME;
+    private String name;
 
     //Boolean
     private boolean isGame;
@@ -17,6 +17,10 @@ public class VideoGame {
     private int rating;
     private int numberOfCopiesSold;
     private int yearReleased;
+    
+    //Constants
+    private static final int MINIMUM_YEAR_RELEASED = 1958;
+    private static final int MAXIMUM_YEAR_RELEASED = 2017;
 
     public VideoGame() {
 
@@ -29,17 +33,17 @@ public class VideoGame {
         this.typeofGame = typeofGame;
     }
 
-    public System getVideoGame() {
+    public System getConsole() {
 
-        return videoGame;
+        return console;
     }
 
     public String getTypeofGame() {
         return typeofGame;
     }
 
-    public String getNAME() {
-        return NAME;
+    public String getName() {
+        return name;
     }
 
     public boolean isIsGame() {
