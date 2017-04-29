@@ -1,116 +1,483 @@
 package edu.hdsb.gwss.zohaib.ics4u.u4;
 
+
+/*
+
+ +* Name: Zohaib Ahmad
+ +
+ + * Date : Saturday , April 28th
+ +
+ + * Version : v0.02
+ +
+ +  * Description : Creates a class of which is the parent to videogame and has a 1..N relationship.
+
+
+
+/**
+ *
+ * @author 1ahmadzoh
+ */
+
+
+
 import java.util.ArrayList;
 
 public class System {
 
-    //String
+    //String - company and console
     private String company;
     private String console;
 
-    //Boolean
-    private boolean isConsole;
-    private boolean stillManufactured;
+    //Boolean - Set to false , only if input is set to true will it change
+    private boolean isConsole = false;
+    private boolean stillManufactured = false;
 
-    //Int
+    //Int - year released and cost
+    private String dateReleased;
     private int yearReleased;
+    private int monthReleased;
+    private int dayReleased;
     private int cost;
+    
+    
+    //Encapsulation Variable(s) - data that user can't see
+    private String storedVideoGameData;
 
-    //Constants
+  
+    
+
+    //Constants (Strings) - All the types of console it can be - Pc, xbox , playstation or wii
     private static final String CONSOLE_ONE = "PC";
     private static final String CONSOLE_TWO = "XBOX";
     private static final String CONSOLE_THREE = "PLAYSTATION";
     private static final String CONSOLE_FOUR = "WII";
+    
+     //Minimum length for company name
+    
+    private static final int MINMUM_LENGTH = 10;
+    
+    //Maximum length for company name
+    
+    private static final int MAXIMUM_LENGTH = 50;
+    
+    //Int
+    
+    //Minimum Year it can be released - first console was released in 1972
+    private static final int MINIMUM_YEAR = 1972;
+    
+    //Maximum Year it can be released - current year can't go beyond that
+    private static final int MAXIMUM_YEAR = 2017;
+    
+    
+    //Minimum Day that it can be released - 1
+    private static final int MINIMUM_DAY = 1;
+    
+    //Maximum Day that it can be released - 30
+    private static final int MAXIMUM_DAY = 30;
+    
+    
+    //Minimum month it can be released - 1
+    private static final int MINIMUM_MONTH = 1;
+    
+    //Maximum month it can be released - 12;
+    private static final int MAXIMUM_MONTH = 12;
 
-    //Object
+    //Array to add game(s)
     private ArrayList<VideoGame> games;
 
+    //Object for game
     VideoGame game = new VideoGame();
-
+    
+    //Syntax to creating default constructor
     public System() {
 
-        //Default Values for constructor
-        this.company = null;
-        this.console = null;
-
-        this.isConsole = false;
-        this.stillManufactured = false;
-
-        this.yearReleased = 0;
-        this.cost = 0;
+        //Default Values for default constructor
+        
+        //Set both company and console name to Microsoft and Xbox
+        this.company = "Microsoft";
+        this.console = "XBOX";
+        
+        //Set isConsole and stillManufactured to true
+        this.isConsole = true;
+        this.stillManufactured = true;
+        
+        //Set yearReleased and cost to 2013 and 499
+        this.yearReleased = 2013;
+        this.monthReleased = 9;
+        this.dayReleased = 22;
+        
+           //Sets date after setting year/day/month
+          this.dateReleased = dayReleased + " : " + monthReleased + " : " + yearReleased;
+        
+        
+        this.cost = 499;
 
     }
-    
+
     //Primary Key : A company cannot have the same id as another
     public String getCompany() {
+        
+        //Returns company based on what it was set or not then "null"
         return company;
     }
-
+    
+    //Sets the company name to argument passed
     public void setCompany(String company) {
-
+        
+        //If company name is above minimum and below maximum its valid
+        if(company.length() >= MINMUM_LENGTH && company.length() <= MAXIMUM_LENGTH){
+        
+         //Sets company if statement returns true
         this.company = company;
+        
+        }
     }
-
+   
+    //Gets the value console was set
     public String getConsole() {
+       
+        //Gets the value of console if set or not then "null"
         return console;
     }
 
+    //Method to set Console with argument String - console
     public void setConsole(String console) {
-        
+
         //If statement to check if the console is equal to any of the four allowed (Pc , playstation , xbox and wii)
         if (CONSOLE_ONE.equals(console) || CONSOLE_TWO.equals(console) || CONSOLE_THREE.equals(console) || CONSOLE_FOUR.equals(console)) {
-
+            
+            //Sets console if the statement returns true
             this.console = console;
 
         }
     }
-
+    
+    //Method to return value of isConsole
     public boolean isIsConsole() {
+        
+        //Returns on what it set - if not default value "false"
         return isConsole;
     }
-
+    
+    //Sets the value of "isConsole" with argument boolean - isConsole
     public void setIsConsole(boolean isConsole) {
-        this.isConsole = isConsole;
-    }
 
+        //this is a console only if IsConsole is set to true
+        if (isConsole) {
+            this.isConsole = isConsole;
+        }
+    }
+    
+    //Method to return value of StillManufactured
     public boolean isStillManufactured() {
+        
+        //Returns on what it set - if not default value "false"
         return stillManufactured;
     }
-
+    
+    //Method to set the value of StillManufactured
     public void setStillManufactured(boolean stillManufactured) {
-        this.stillManufactured = stillManufactured;
-    }
 
-    public int getYearReleased() {
-        return yearReleased;
-    }
+        //This is used to check if the console is still manufactured
+        if (stillManufactured) {
 
-    public void setYearReleased(int yearReleased) {
-        this.yearReleased = yearReleased;
-    }
+            this.stillManufactured = stillManufactured;
 
+        }
+    }
+    
+    //Method to get value of getYearReleased
+    public String getdateReleased() {
+        
+        //Returns value on what it is set - if not default value "0"
+        return dateReleased;
+    }
+    
+    //Method to set value of date released
+    public void setdateReleased(int yearReleased , int monthReleased , int dayReleased) {
+         
+        //If it is above or equal to min or less then equal to max then set it
+         if (yearReleased >= MINIMUM_YEAR && yearReleased <= MAXIMUM_YEAR) {
+
+            this.yearReleased = yearReleased;
+
+        }
+         
+         
+        // Checks to see if day is valid
+        
+        if(dayReleased >= MINIMUM_DAY && dayReleased <= MAXIMUM_DAY){
+            
+            this.dayReleased = dayReleased;
+            
+        }
+         
+        //Checks to see if month is valid 
+        
+          if(monthReleased >= MINIMUM_MONTH && monthReleased <= MAXIMUM_MONTH){
+            
+            this.monthReleased = monthReleased;
+            
+        }
+          
+          //Sets date after setting day/month/year
+          this.dateReleased = dayReleased + " : " + monthReleased + " : " + yearReleased;
+         
+    }
+    
+    //Method to get cost
     public int getCost() {
+        
+        //Returns value on what it is set - if not default value "0"
         return cost;
     }
-
+    
+    //Method to set value of cost
     public void setCost(int cost) {
-        this.cost = cost;
-    }
+        
+        //Since pc can go into $10k range as long as its above 100 its valid
+        if (cost >= 100) {
 
-    public ArrayList<VideoGame> getGames() {
+            this.cost = cost;
+
+        }
+    }
+    
+    
+      //Add Method
+    
+    public ArrayList<VideoGame> add(Object videoGame) {
+       
+
+        
+        VideoGame videogame = new VideoGame();
+        
+        //Variable
+        boolean contains = videoGame.equals(games);
+        
+        
+     
+        
+       
+       //If valid method checks to see if null , and if it has the base amount of properties needed in order to be a videogame and it can't contain duplicate
+        if(videogame.isValid(videoGame) && (contains == true)){
+            
+        games.add((VideoGame) videoGame);
+            
+        }
+        
+        
         return games;
+       
     }
 
-    public void setGames(ArrayList<VideoGame> games) {
-        this.games = games;
+   
+    
+    
+      
+    //Can't tell user the data that is stored from video game
+    public void setStoredVideoGameData(String storedVideoGameData) {
+        
+        //As long as there's data its valid
+        if(!(storedVideoGameData.isEmpty())){
+        this.storedVideoGameData = storedVideoGameData;
+        }
     }
 
-    public VideoGame getGame() {
-        return game;
+    //To String Method
+    @Override
+    public String toString() {
+
+        StringBuilder result = new StringBuilder();
+
+        //Formats The Output nicely, this.company refers to company name + Object with curly braces and if no info dont give object name
+        if (this.company == null) {
+
+            result.append("Object {" + "\n");
+
+        } else {
+
+            result.append(this.company).append("Object {" + "\n");
+
+        }
+        //Specifically tells user, the company name
+        result.append("Company Name : ").append(this.company).append("\n");
+
+        //Tells user the console
+        result.append("Console : ").append(this.console).append("\n");
+
+        //Tells user wheter it is a console or not
+        result.append("Is it a Console : ").append(this.isConsole).append("\n");
+
+        //Tells user wheter console is still manufactured
+        result.append("Is it still manufactured : ").append(this.stillManufactured).append("\n");
+
+        //Tells user the year the console was released
+        result.append("Date Released : ").append(this.dateReleased).append("\n");
+
+        //Tells user the cost of the game
+        result.append("Cost of the game ").append(this.cost).append("\n" + "}");
+
+        return result.toString();
+
     }
 
-    public void setGame(VideoGame game) {
-        this.game = game;
+    //Equals Method
+    @Override
+    public boolean equals(Object obj) {
+
+        //Base case is object null?
+        if (obj == null) {
+
+            return false;
+
+        }
+
+        //If classes of object does not equal the class of other return false
+        if (getClass() != obj.getClass()) {
+
+            return false;
+
+        }
+
+        //If current object thats being invoked is equal to the object its comparing to  , return true
+        if (this == obj) {
+
+            return true;
+
+        }
+
+        //Create new object in order to check if properties match
+        System other = (System) obj;
+
+        //Checks to see if comapny match and if not return false
+        if (company != other.company) {
+
+            return false;
+
+        }
+
+        //Checks to see if type of console matches and if not return false
+        if (console != other.console) {
+
+            return false;
+
+        }
+
+        //Checks to see if isConsole matches (f/f) and (t/t) and if not return false
+        if (!(isConsole != other.isConsole)) {
+
+            return false;
+
+        }
+
+        //Checks to see if isManufactured is both set to same (false/false) or (true/true)
+        if (!(stillManufactured != other.stillManufactured)) {
+
+            return false;
+
+        }
+
+        //Checks to see date released match
+        if (dateReleased != other.dateReleased) {
+
+            return false;
+
+        }
+
+        //Checks to see if cost is equal
+        if (cost != other.cost) {
+
+            return false;
+
+        }
+
+        return true;
     }
+    
+    
+    
+       //IsValid Method (Checks to see if minimum requirements have been set)
+    public boolean isValid(Object obj) {
+
+        //Creates the object in order to check its properties
+        System other = (System) obj;
+
+        //A System needs a console , company , isConsole to be set to true, yearReleased and cost 
+        
+         //Checks to see if console is set - if not then it will set to null (invalid)
+         if(other.console == null){
+             
+             return false;
+             
+             
+         }
+        
+        
+         //Checks to see if type of company is set - if not then it will be set null (invalid)
+         
+         if(other.company == null){
+             
+             return false;
+             
+         }
+        
+        //Checks to see if "isConsole" is set to true - if not then it will be set false (invalid)
+        
+        if((other.isConsole == false)){
+            
+            return false;
+            
+            
+        }
+        
+        //Checks to see if year Released is set  - if not then it will be set null(invalid)
+        
+        if(other.dateReleased == null){
+            
+            return false;
+            
+            
+        }
+        
+        
+      
+        
+        
+        
+        
+       //Checks to see if cost is set - if not then it will be set to 0 (invalid)
+       
+       
+       if(other.cost == 0){
+           
+           return false;
+           
+       }
+       
+       
+      
+        
+        
+        
+        
+        return true;
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+  
+    
+    
+    
+    
+    
+    
 
 }

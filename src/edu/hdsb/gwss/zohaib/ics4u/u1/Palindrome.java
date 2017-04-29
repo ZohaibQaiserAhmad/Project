@@ -1,4 +1,4 @@
-
+package edu.hdsb.gwss.zohaib.ics4u.u1;
 import java.util.Scanner;
 
 /*
@@ -13,7 +13,7 @@ import java.util.Scanner;
 
  the same way forwards as they are backwards are called palindromes
 
-package edu.hdsb.gwss.zohaib.ics4u.u1;
+
 
 /**
  *

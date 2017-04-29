@@ -1,8 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+
+ +* Name: Zohaib Ahmad
+ +
+ + * Date : Saturday , April 28th
+ +
+ + * Version : v0.02
+ +
+ +  * Description : Used to test System and video game
+
+
+
+/**
+ *
+ * @author 1ahmadzoh
  */
+
 package edu.hdsb.gwss.zohaib.ics4u.u4;
 
 /**
@@ -15,21 +27,17 @@ public class VideoGameTester {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
+        VideoGame cod4 = new VideoGame();
+
+        VideoGame cod5 = new VideoGame();
         
-        VideoGame cod = new VideoGame();
-        
-        assert( cod.getName() == null );
-        assert( cod.getNumberOfCopiesSold() == 0 );
-        
-      
         System ps4 = new System();
         
-        
-        
-        
-        
-        
-        
+        ps4.add(cod5);
+
+        java.lang.System.out.println();
+
     }
-    
+
 }
