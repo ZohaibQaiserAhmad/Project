@@ -21,9 +21,12 @@ package edu.hdsb.gwss.zohaib.ics4u.u4;
 
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class System {
 
+
+public class System{
+      
     //String - company and console
     private String company;
     private String console;
@@ -32,7 +35,7 @@ public class System {
     private boolean isConsole = false;
     private boolean stillManufactured = false;
 
-    //Int - year released and cost
+    //Int - date released - year released + month released + day released / and a  cost variable
     private String dateReleased;
     private int yearReleased;
     private int monthReleased;
@@ -54,7 +57,7 @@ public class System {
     
      //Minimum length for company name
     
-    private static final int MINMUM_LENGTH = 10;
+    private static final int MINMUM_LENGTH = 4;
     
     //Maximum length for company name
     
@@ -85,32 +88,33 @@ public class System {
     //Array to add game(s)
     private ArrayList<VideoGame> games;
 
+
     //Object for game
     VideoGame game = new VideoGame();
     
     //Syntax to creating default constructor
     public System() {
-
+        
         //Default Values for default constructor
         
-        //Set both company and console name to Microsoft and Xbox
-        this.company = "Microsoft";
-        this.console = "XBOX";
+        //Set both company and console name to null and null
+        this.company = null;
+        this.console = null;
         
-        //Set isConsole and stillManufactured to true
-        this.isConsole = true;
-        this.stillManufactured = true;
+        //Set isConsole and stillManufactured to false
+        this.isConsole = false;
+        this.stillManufactured = false;
         
-        //Set yearReleased and cost to 2013 and 499
-        this.yearReleased = 2013;
-        this.monthReleased = 9;
-        this.dayReleased = 22;
+        //Set yearReleased and cost to 0 and 0
+        this.yearReleased = 0;
+        this.monthReleased = 0;
+        this.dayReleased = 0;
         
            //Sets date after setting year/day/month
-          this.dateReleased = dayReleased + " : " + monthReleased + " : " + yearReleased;
+          this.dateReleased = null;
         
-        
-        this.cost = 499;
+          //Sets cost to 0 
+          this.cost = 0;
 
     }
 
@@ -153,7 +157,7 @@ public class System {
     }
     
     //Method to return value of isConsole
-    public boolean isIsConsole() {
+    public boolean getIsConsole() {
         
         //Returns on what it set - if not default value "false"
         return isConsole;
@@ -194,7 +198,7 @@ public class System {
     }
     
     //Method to set value of date released
-    public void setdateReleased(int yearReleased , int monthReleased , int dayReleased) {
+    public void setdateReleased(int dayReleased , int monthReleased , int yearReleased) {
          
         //If it is above or equal to min or less then equal to max then set it
          if (yearReleased >= MINIMUM_YEAR && yearReleased <= MAXIMUM_YEAR) {
@@ -221,7 +225,7 @@ public class System {
         }
           
           //Sets date after setting day/month/year
-          this.dateReleased = dayReleased + " : " + monthReleased + " : " + yearReleased;
+          this.dateReleased = dayReleased + " / " + monthReleased + " / " + yearReleased;
          
     }
     
@@ -244,34 +248,137 @@ public class System {
     }
     
     
-      //Add Method
+      //Add Method - adds videogame object(s) to system object
     
     public ArrayList<VideoGame> add(Object videoGame) {
+        
+      
+       //Creates object videogame of which will be checked and then added to list of videogames 
+        this.games = new ArrayList<>();
+        game = (VideoGame) videoGame;
+        
+        //Variable to track if game is already in the list
+        boolean contains = false;
+        
+        //if the array is empty just add the game in
+        if(games.isEmpty()){
+            
+        games.add(game); 
+         }
        
+        
+        //for int i = game size - 1 , i greater then 0, i --
+       for(int i = games.size() -1 ; i > 0 ; i--){
+       
+           //if games .get at i equals video game do this
+         if(games.get(i).equals(videoGame)){
+            
+            //contains equals true , say duplicate and remove
+            contains = true;
+            java.lang.System.out.println("Duplicate");
+            this.games.remove(i);
+            
+        
+         
+       }
+    }    
 
+      
+        //If valid method checks to see if null , and if it has the base amount of properties needed in order to be a videogame and it can't contain duplicate
+         if(contains == false && game.isValid(videoGame)){
+            
+             //add game to array
+           this.games.add(game);
+           
+           //tells user it was successfull
+           java.lang.System.out.println("Successfully added");        
         
-        VideoGame videogame = new VideoGame();
-        
-        //Variable
-        boolean contains = videoGame.equals(games);
-        
-        
+           //else
+           } else {
+            
+            //Trace message / fail
+            java.lang.System.out.println("failed - not valid, does not exist");
+          
+     }
+           
+            
+      
      
-        
-       
-       //If valid method checks to see if null , and if it has the base amount of properties needed in order to be a videogame and it can't contain duplicate
-        if(videogame.isValid(videoGame) && (contains == true)){
-            
-        games.add((VideoGame) videoGame);
-            
-        }
-        
-        
-        return games;
+    //return array of games
+    return this.games;
        
     }
+    
+    
+    
+     //Removal Method - removes videogame object(s) to system object
+    
+    public ArrayList<VideoGame> remove(Object videoGame) {
+        
+    
+        //Variable to track if game is already in the list
+        boolean contains = false;
+       
+        //for loop that iterates through the array to find 
+       for(int i = 0 ; i < games.size() ; i++){
+       
+         //if statement thats gets all games
+         if(games.get(i).equals(videoGame)){
+            
+            contains = true;
+            java.lang.System.out.println("Removed");
+            this.games.remove(videoGame);
+            
+        
+       //else statement  
+       } else {
+             
+             java.lang.System.out.println("Could not find it");
+             
+             
+         }
+    }    
 
-   
+
+      //returns list without removed videogames     
+      return this.games;
+       
+    }
+    
+    //Get Method
+    public ArrayList<VideoGame> get(Object videoGame) {
+       
+        
+       //Variable to track if game is already in the list
+        boolean contains = false;
+       
+        //for loop that iterates through the array to find 
+       for(int i = 0 ; i < games.size() ; i++){
+       
+         //if statement thats gets all games
+         if(games.get(i).equals(videoGame)){
+            
+            contains = true;
+            java.lang.System.out.println("Gets");
+            this.games.get(i);
+            
+        
+       //else statement  
+       } else {
+             
+             java.lang.System.out.println("Could not find it");
+             
+             
+         }
+    }    
+
+
+      //returns list without removed videogames     
+      return this.games;
+       
+       
+    }
+    
     
     
       
@@ -290,14 +397,14 @@ public class System {
 
         StringBuilder result = new StringBuilder();
 
-        //Formats The Output nicely, this.company refers to company name + Object with curly braces and if no info dont give object name
+        //Formats The Output nicely, this.company refers to company name + Company with curly braces and if no info dont give object name
         if (this.company == null) {
 
-            result.append("Object {" + "\n");
+            result.append("Company {" + "\n");
 
         } else {
 
-            result.append(this.company).append("Object {" + "\n");
+            result.append(this.company).append("Company {" + "\n");
 
         }
         //Specifically tells user, the company name
@@ -316,7 +423,7 @@ public class System {
         result.append("Date Released : ").append(this.dateReleased).append("\n");
 
         //Tells user the cost of the game
-        result.append("Cost of the game ").append(this.cost).append("\n" + "}");
+        result.append("Cost of the game ").append(this.cost).append("\n" + "}" + "\n");
 
         return result.toString();
 
@@ -351,14 +458,14 @@ public class System {
         System other = (System) obj;
 
         //Checks to see if comapny match and if not return false
-        if (company != other.company) {
+        if (company == null ? other.company != null : !company.equals(other.company)) {
 
             return false;
 
         }
 
         //Checks to see if type of console matches and if not return false
-        if (console != other.console) {
+        if (console == null ? other.console != null : !console.equals(other.console)) {
 
             return false;
 
@@ -379,20 +486,34 @@ public class System {
         }
 
         //Checks to see date released match
-        if (dateReleased != other.dateReleased) {
+        if (dateReleased == null ? other.dateReleased != null : !dateReleased.equals(other.dateReleased)) {
 
             return false;
 
         }
+        
 
-        //Checks to see if cost is equal
-        if (cost != other.cost) {
+       //Checks to see if cost is equal
+        
+        return cost == other.cost;
+    }
 
-            return false;
-
-        }
-
-        return true;
+    @Override // used to overide .equals method
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.company);
+        hash = 83 * hash + Objects.hashCode(this.console);
+        hash = 83 * hash + (this.isConsole ? 1 : 0);
+        hash = 83 * hash + (this.stillManufactured ? 1 : 0);
+        hash = 83 * hash + Objects.hashCode(this.dateReleased);
+        hash = 83 * hash + this.yearReleased;
+        hash = 83 * hash + this.monthReleased;
+        hash = 83 * hash + this.dayReleased;
+        hash = 83 * hash + this.cost;
+        hash = 83 * hash + Objects.hashCode(this.storedVideoGameData);
+        hash = 83 * hash + Objects.hashCode(this.games);
+        hash = 83 * hash + Objects.hashCode(this.game);
+        return hash;
     }
     
     
@@ -403,11 +524,12 @@ public class System {
         //Creates the object in order to check its properties
         System other = (System) obj;
 
-        //A System needs a console , company , isConsole to be set to true, yearReleased and cost 
+        //A System needs a console , company , isConsole to be set to true, dateReleased and cost 
         
          //Checks to see if console is set - if not then it will set to null (invalid)
          if(other.console == null){
              
+             java.lang.System.out.println("Invalid Object - properties don't make sense");
              return false;
              
              
@@ -418,6 +540,7 @@ public class System {
          
          if(other.company == null){
              
+             java.lang.System.out.println("Invalid Object - properties don't make sense");
              return false;
              
          }
@@ -426,6 +549,7 @@ public class System {
         
         if((other.isConsole == false)){
             
+            java.lang.System.out.println("Invalid Object - properties don't make sense");
             return false;
             
             
@@ -435,6 +559,7 @@ public class System {
         
         if(other.dateReleased == null){
             
+            java.lang.System.out.println("Invalid Object - properties don't make sense");
             return false;
             
             
@@ -451,14 +576,15 @@ public class System {
        
        if(other.cost == 0){
            
+           java.lang.System.out.println("Invalid Object - properties don't make sense");
            return false;
            
        }
        
        
       
-        
-        
+         //prints out message is valid
+         java.lang.System.out.println("Is Valid");  
         
         
         return true;

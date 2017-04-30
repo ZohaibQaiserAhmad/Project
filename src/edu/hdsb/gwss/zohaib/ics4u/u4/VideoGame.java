@@ -1,5 +1,7 @@
 package edu.hdsb.gwss.zohaib.ics4u.u4;
 
+import java.util.Objects;
+
 /*
 
  +* Name: Zohaib Ahmad
@@ -26,7 +28,7 @@ package edu.hdsb.gwss.zohaib.ics4u.u4;
 public class VideoGame {
 
     //Object
-    private System console;
+    private System consoles;
 
     //String - type of game and name
     private String typeofGame;
@@ -36,14 +38,14 @@ public class VideoGame {
     private boolean isGame = false;
     private boolean isAvailable = false;
 
-    //Int - rating, numbersofcopiessold , year released and cost
+    //Int - rating, numbersofcopiessold , year released and costs
     private int rating;
     private int numberOfCopiesSold;
-    private String dateReleased;
-    private int yearReleased;
-    private int monthReleased;
-    private int dayReleased;
-    private int cost;
+    private String releasedDate;
+    private int releasedYear;
+    private int releasedMonth;
+    private int releasedDay;
+    private int costs;
     
     
     
@@ -88,39 +90,43 @@ public class VideoGame {
     private static final int MINIMUM_CHARACTERS = 5;
     private static final int MAXIMUM_CHARACTERS = 40;
 
-    //Maximum amount game can cost and minimum - games can go as low as 5
+    //Maximum amount game can costs and minimum - games can go as low as 5
     private static final int MINIMUM_COST = 5;
     private static final int MAXIMUM_COST = 80;
 
     public VideoGame() {
 
         //Default values for default constructor
+            
+        //Type of game set to null , name set to null
+        this.typeofGame = null;
+        this.name = null;
         
-        this.typeofGame = "ACTION";
-        this.name = "Call of duty";
-
-        this.isGame = true;
+        //isGame set to false  and available false
+        this.isGame = false;
         this.isAvailable = false;
-
-        this.rating = 1;
-        this.numberOfCopiesSold = 12;
         
-        this.dayReleased = 12;
-        this.monthReleased = 9;
-        this.yearReleased = 2012;
+        //rating set to 0 , copies sold set to 0
+        this.rating = 0;
+        this.numberOfCopiesSold = 0;
+        
+        //Day set to 0 , month set to 0 out of 12 months , year set to 0
+        this.releasedDay = 0;
+        this.releasedMonth = 0;
+        this.releasedYear = 0;
         
         //Sets date after setting day/month/year
-        this.dateReleased = dayReleased + " : " + monthReleased + " : " + yearReleased;
-        this.cost = 15;
+        this.releasedDate = null;
+        this.costs = 0;
 
     }
 
-    public System getConsole() {
-        return console;
+    public System getConsoles() {
+        return consoles;
     }
 
-    public void setConsole(System console) {
-        this.console = console;
+    public void setConsoles(System consoles) {
+        this.consoles = consoles;
     }
 
     //Returns type of game(genre)
@@ -209,7 +215,7 @@ public class VideoGame {
     public void setNumberOfCopiesSold(int numberOfCopiesSold) {
 
         //Since number of copies sold could be in millions - keep it simple and allow any number as long as it is above 0
-        if (numberOfCopiesSold >= 0) {
+        if (numberOfCopiesSold > 0) {
 
             this.numberOfCopiesSold = numberOfCopiesSold;
 
@@ -220,16 +226,16 @@ public class VideoGame {
     public String getdateReleased() {
         
         //Returns value on what it is set - if not default value "0"
-        return dateReleased;
+        return releasedDate;
     }
     
     //Method to set value of date released
-    public void setdateReleased(int yearReleased , int monthReleased , int dayReleased) {
+    public void setdateReleased(int dayReleased , int monthReleased , int yearReleased) {
          
         //If it is above or equal to min or less then equal to max then set it
          if (yearReleased >= MINIMUM_YEAR_RELEASED && yearReleased <= MAXIMUM_YEAR_RELEASED) {
 
-            this.yearReleased = yearReleased;
+            this.releasedYear = yearReleased;
 
         }
          
@@ -238,7 +244,7 @@ public class VideoGame {
         
         if(dayReleased >= MINIMUM_DAY && dayReleased <= MAXIMUM_DAY){
             
-            this.dayReleased = dayReleased;
+            this.releasedDay = dayReleased;
             
         }
          
@@ -246,25 +252,25 @@ public class VideoGame {
         
           if(monthReleased >= MINIMUM_MONTH && monthReleased <= MAXIMUM_MONTH){
             
-            this.monthReleased = monthReleased;
+            this.releasedMonth = monthReleased;
             
         }
           
           //Sets date after setting day/month/year
-          this.dateReleased = dayReleased + " : " + monthReleased + " : " + yearReleased;
+          this.releasedDate = dayReleased + " : " + monthReleased + " : " + yearReleased;
          
     }
 
-    //Gets the cost and returns
-    public int getCost() {
-        return cost;
+    //Gets the costs and returns
+    public int getCosts() {
+        return costs;
     }
 
-    public void setCost(int cost) {
+    public void setCosts(int costs) {
 
-        //If the cost of the game is greater then minimum/equal - 5 and less then maximum/equal - 80 set the cost
-        if (cost >= MINIMUM_COST && cost <= MAXIMUM_COST) {
-            this.cost = cost;
+        //If the costs of the game is greater then minimum/equal - 5 and less then maximum/equal - 80 set the costs
+        if (costs >= MINIMUM_COST && costs <= MAXIMUM_COST) {
+            this.costs = costs;
         }
     }
     
@@ -293,18 +299,25 @@ public class VideoGame {
 
         StringBuilder result = new StringBuilder();
 
-        //Formats The Output nicely, this.company refers to console name + Object with curly braces and if no info dont give object name
-        if (this.console == null) {
+        //Formats The Output nicely, this.company refers to consoles name + Console with curly braces and if no info dont give object name
+        if (this.consoles == null) {
 
-            result.append("Object {" + "\n");
+            result.append("Console {" + "\n");
+            
+            //If consoles name not listed 
+            result.append("Cosole Name : ").append("N/A").append("\n");
 
         } else {
 
-            result.append(this.console).append("Object {" + "\n");
-
+            result.append(this.consoles).append("Console { " + "\n");
+            
+            
+        //Specifically tells user, the consoles name
+        result.append("Console Name : ").append(this.consoles).append("\n");
+            
+            
         }
-        //Specifically tells user, the console name
-        result.append("Cosole Name : ").append(this.console).append("\n");
+        
 
         //Tells user the type of game
         result.append("Type of game : ").append(this.typeofGame).append("\n");
@@ -312,7 +325,7 @@ public class VideoGame {
         //Tells user the name of the game
         result.append("Name of game : ").append(this.name).append("\n");
 
-        //Tells user wheter console is still available for purchase
+        //Tells user wheter consoles is still available for purchase
         result.append("Is it available : ").append(this.isAvailable).append("\n");
 
         //Tells user the rating of the game
@@ -322,10 +335,10 @@ public class VideoGame {
         result.append("Number of copies sold : ").append(this.numberOfCopiesSold).append("\n");
 
         //Tells user the year game was released
-        result.append("Date Game Released : ").append(this.dateReleased).append("\n");
+        result.append("Date Game Released : ").append(this.releasedDate).append("\n");
 
-        //Tells user cost of the game
-        result.append("Cost of the game : ").append(this.cost).append("\n" + "}");
+        //Tells user costs of the game
+        result.append("Cost of the game : ").append(this.costs).append("\n" + "}");
 
         //Returns the output in modified format created
         return result.toString();
@@ -360,8 +373,8 @@ public class VideoGame {
         //Create new object in order to check if properties match
         VideoGame other = (VideoGame) obj;
 
-        //Checks to see if console match and if not return false
-        if (console != other.console) {
+        //Checks to see if consoles match and if not return false
+        if (consoles != other.consoles) {
 
             return false;
 
@@ -410,14 +423,14 @@ public class VideoGame {
         }
 
         //Checks to see year released match
-        if (dateReleased != other.dateReleased) {
+        if (releasedDate != other.releasedDate) {
 
             return false;
 
         }
 
-        //Checks to see if cost is equal
-        if (cost != other.cost) {
+        //Checks to see if costs is equal
+        if (costs != other.costs) {
 
             return false;
 
@@ -426,21 +439,47 @@ public class VideoGame {
         return true;
     }
 
+    @Override //Used to over ride previous .equals method
+    public int  hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.consoles);
+        hash = 67 * hash + Objects.hashCode(this.typeofGame);
+        hash = 67 * hash + Objects.hashCode(this.name);
+        hash = 67 * hash + (this.isGame ? 1 : 0);
+        hash = 67 * hash + (this.isAvailable ? 1 : 0);
+        hash = 67 * hash + this.rating;
+        hash = 67 * hash + this.numberOfCopiesSold;
+        hash = 67 * hash + Objects.hashCode(this.releasedDate);
+        hash = 67 * hash + this.releasedYear;
+        hash = 67 * hash + this.releasedMonth;
+        hash = 67 * hash + this.releasedDay;
+        hash = 67 * hash + this.costs;
+        hash = 67 * hash + Objects.hashCode(this.codeforGame);
+        return hash;
+    }
+
     //IsValid Method (Checks to see if minimum requirements have been set)
-    public boolean isValid(Object obj) {
+    public  boolean isValid(Object obj) {
 
         //Creates the object in order to check its properties
         VideoGame other = (VideoGame) obj;
-
-        //A game needs a type of game(genre) , name , and has to be a game , its year released , cost 
         
       
+
+        //A game needs a type of game(genre) , name , and has to be a game , its date released , costs , consoles
+         if(other.consoles == null){
+             
+             java.lang.System.out.println("Invalid Object - properties don't make sense");
+             return false;
+             
+             
+         }
         
-        
-         //Checks to see if type of game is set as null will be default if not set properly
+        //Checks to see if type of game is set as null will be default if not set properly
          
          if(other.typeofGame == null){
              
+             java.lang.System.out.println("Invalid Object - properties don't make sense");
              return false;
              
          }
@@ -449,6 +488,7 @@ public class VideoGame {
         
         if((other.isGame == false)){
             
+            java.lang.System.out.println("Invalid Object - properties don't make sense");
             return false;
             
             
@@ -456,25 +496,36 @@ public class VideoGame {
         
         //Checks to see if date Released is set , as it will be set to null if not set properly
         
-        if(other.dateReleased == null){
+        if(other.releasedDate == null){
             
+            
+            java.lang.System.out.println("Invalid Object - properties don't make sense");
             return false;
             
             
         }
         
         
-        //Checks to see if cost is above 0 as cost will be set 0 if not set properly 
+        //Checks to see if costs is above 0 as costs will be set 0 if not set properly 
         
-        if(other.cost == 0){
+        if(other.costs == 0){
             
+            java.lang.System.out.println("Invalid Object - properties don't make sense");
             return false;
             
             
         }
         
         
+       
         
+       //prints out message isvalid
+            
+       java.lang.System.out.println("Is Valid");     
+            
+            
+            
+       
         
         return true;
         
