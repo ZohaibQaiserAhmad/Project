@@ -122,6 +122,8 @@ public class VideoGameTester {
         callofduty.isValid(callofduty);
 
         //Test #3 : Add(..)
+        java.lang.System.out.println("\n" + "Adding invalid 'videogame'");
+
         system.add(games);
 
         //Empty
@@ -131,22 +133,22 @@ public class VideoGameTester {
 
         system.add(gam);
 
-        java.lang.System.out.println("Test #3 - add(..) invalid Triangle");
+        java.lang.System.out.println("\n" + "Test #3 - add(..) invalid Triangle" + "\n");
 
         VideoGame ga = new VideoGame();
 
         ga.setCosts(0);
         ga.setIsAvailable(false);
         ga.setRating(-1);
-
+        
         system.add(ga);
 
         java.lang.System.out.println();
 
         //Test #4 : add(..) - adding a valid object - created a valid system - playstation and added valid game call of duty
+        java.lang.System.out.println("\n" + "Test #3 - add(..) Valid Triangle" + "\n");
         playstation.add(callofduty);
-
-        java.lang.System.out.println("-------------------");
+        
 
     }
 
