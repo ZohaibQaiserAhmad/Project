@@ -18,13 +18,6 @@ import java.util.Objects;
  *
  * @author 1ahmadzoh
  */
-
-
-
-
-
-
-
 public class VideoGame {
 
     //Object
@@ -46,13 +39,9 @@ public class VideoGame {
     private int releasedMonth;
     private int releasedDay;
     private int costs;
-    
-    
-    
+
     //Encapsulation Variable(s)
     private String codeforGame;
-
-    
 
     //Constants
     //Minimum Year(first video game was released in 1958)
@@ -60,17 +49,16 @@ public class VideoGame {
 
     //Maximum Year(Game can't exceed current year - not possible)
     private static final int MAXIMUM_YEAR_RELEASED = 2017;
-     
+
     //Minimum Day that it can be released - 1
     private static final int MINIMUM_DAY = 1;
-    
+
     //Maximum Day that it can be released - 30
     private static final int MAXIMUM_DAY = 30;
-    
-    
+
     //Minimum month it can be released - 1
     private static final int MINIMUM_MONTH = 1;
-    
+
     //Maximum month it can be released - 12;
     private static final int MAXIMUM_MONTH = 12;
 
@@ -97,24 +85,23 @@ public class VideoGame {
     public VideoGame() {
 
         //Default values for default constructor
-            
         //Type of game set to null , name set to null
         this.typeofGame = null;
         this.name = null;
-        
+
         //isGame set to false  and available false
         this.isGame = false;
         this.isAvailable = false;
-        
+
         //rating set to 0 , copies sold set to 0
         this.rating = 0;
         this.numberOfCopiesSold = 0;
-        
+
         //Day set to 0 , month set to 0 out of 12 months , year set to 0
         this.releasedDay = 0;
         this.releasedMonth = 0;
         this.releasedYear = 0;
-        
+
         //Sets date after setting day/month/year
         this.releasedDate = null;
         this.costs = 0;
@@ -222,43 +209,40 @@ public class VideoGame {
         }
     }
 
- //Method to get value of getYearReleased
+    //Method to get value of getYearReleased
     public String getdateReleased() {
-        
+
         //Returns value on what it is set - if not default value "0"
         return releasedDate;
     }
-    
+
     //Method to set value of date released
-    public void setdateReleased(int dayReleased , int monthReleased , int yearReleased) {
-         
+    public void setdateReleased(int dayReleased, int monthReleased, int yearReleased) {
+
         //If it is above or equal to min or less then equal to max then set it
-         if (yearReleased >= MINIMUM_YEAR_RELEASED && yearReleased <= MAXIMUM_YEAR_RELEASED) {
+        if (yearReleased >= MINIMUM_YEAR_RELEASED && yearReleased <= MAXIMUM_YEAR_RELEASED) {
 
             this.releasedYear = yearReleased;
 
         }
-         
-         
+
         // Checks to see if day is valid
-        
-        if(dayReleased >= MINIMUM_DAY && dayReleased <= MAXIMUM_DAY){
-            
+        if (dayReleased >= MINIMUM_DAY && dayReleased <= MAXIMUM_DAY) {
+
             this.releasedDay = dayReleased;
-            
+
         }
-         
+
         //Checks to see if month is valid 
-        
-          if(monthReleased >= MINIMUM_MONTH && monthReleased <= MAXIMUM_MONTH){
-            
+        if (monthReleased >= MINIMUM_MONTH && monthReleased <= MAXIMUM_MONTH) {
+
             this.releasedMonth = monthReleased;
-            
+
         }
-          
-          //Sets date after setting day/month/year
-          this.releasedDate = dayReleased + " : " + monthReleased + " : " + yearReleased;
-         
+
+        //Sets date after setting day/month/year
+        this.releasedDate = dayReleased + " : " + monthReleased + " : " + yearReleased;
+
     }
 
     //Gets the costs and returns
@@ -273,25 +257,17 @@ public class VideoGame {
             this.costs = costs;
         }
     }
-    
-   
-    
-
 
     //Data to hide so can't return to user
     public void setCodeforGame(String codeforGame) {
-        
+
         //As long as their is something in code its valid
-        
-        if(!(codeforGame.isEmpty())){
-            
-        this.codeforGame = codeforGame;
-        
+        if (!(codeforGame.isEmpty())) {
+
+            this.codeforGame = codeforGame;
+
         }
     }
-    
-    
-    
 
     //To String Method
     @Override
@@ -303,21 +279,18 @@ public class VideoGame {
         if (this.consoles == null) {
 
             result.append("Console {" + "\n");
-            
+
             //If consoles name not listed 
-            result.append("Cosole Name : ").append("N/A").append("\n");
+            result.append("Cosole Name : ").append("\n");
 
         } else {
 
-            result.append(this.consoles).append("Console { " + "\n");
-            
-            
-        //Specifically tells user, the consoles name
-        result.append("Console Name : ").append(this.consoles).append("\n");
-            
-            
+            result.append(this.consoles).append("\n" + "Console { " + "\n");
+
+            //Specifically tells user, the consoles name
+            result.append("Console Name : ").append(this.consoles).append("\n");
+
         }
-        
 
         //Tells user the type of game
         result.append("Type of game : ").append(this.typeofGame).append("\n");
@@ -440,7 +413,7 @@ public class VideoGame {
     }
 
     @Override //Used to over ride previous .equals method
-    public int  hashCode() {
+    public int hashCode() {
         int hash = 5;
         hash = 67 * hash + Objects.hashCode(this.consoles);
         hash = 67 * hash + Objects.hashCode(this.typeofGame);
@@ -459,82 +432,53 @@ public class VideoGame {
     }
 
     //IsValid Method (Checks to see if minimum requirements have been set)
-    public  boolean isValid(Object obj) {
-
-        //Creates the object in order to check its properties
-        VideoGame other = (VideoGame) obj;
-        
-      
+    public boolean isValid(VideoGame videogame) {
 
         //A game needs a type of game(genre) , name , and has to be a game , its date released , costs , consoles
-         if(other.consoles == null){
-             
-             java.lang.System.out.println("Invalid Object - properties don't make sense");
-             return false;
-             
-             
-         }
-        
+        if (consoles == null) {
+
+            java.lang.System.out.println("Invalid Object - properties don't make sense");
+            return false;
+
+        }
+
         //Checks to see if type of game is set as null will be default if not set properly
-         
-         if(other.typeofGame == null){
-             
-             java.lang.System.out.println("Invalid Object - properties don't make sense");
-             return false;
-             
-         }
-        
+        if (videogame.typeofGame == null) {
+
+            java.lang.System.out.println("Invalid Object - properties don't make sense");
+            return false;
+
+        }
+
         //Checks to see if "isGame" is set to true as it will be set to false if not set properly
-        
-        if((other.isGame == false)){
-            
+        if ((videogame.isGame == false)) {
+
             java.lang.System.out.println("Invalid Object - properties don't make sense");
             return false;
-            
-            
+
         }
-        
+
         //Checks to see if date Released is set , as it will be set to null if not set properly
-        
-        if(other.releasedDate == null){
-            
-            
+        if (videogame.releasedDate == null) {
+
             java.lang.System.out.println("Invalid Object - properties don't make sense");
             return false;
-            
-            
+
         }
-        
-        
+
         //Checks to see if costs is above 0 as costs will be set 0 if not set properly 
-        
-        if(other.costs == 0){
-            
+        if (videogame.costs == 0) {
+
             java.lang.System.out.println("Invalid Object - properties don't make sense");
             return false;
-            
-            
+
         }
-        
-        
-       
-        
-       //prints out message isvalid
-            
-       java.lang.System.out.println("Is Valid");     
-            
-            
-            
-       
-        
+
+        //prints out message isvalid
+        java.lang.System.out.println("Is Valid");
+
         return true;
-        
-        
-        
-        
-        
-        
-        
+
     }
 
 }

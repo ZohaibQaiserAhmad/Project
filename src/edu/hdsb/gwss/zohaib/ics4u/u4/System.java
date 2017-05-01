@@ -73,14 +73,14 @@ public class System {
 
     //Array to add game(s)
     private ArrayList<VideoGame> games;
- 
 
-    //Object for game
-    VideoGame game = new VideoGame();
+    VideoGame game;
 
     //Syntax to creating default constructor
     public System() {
 
+        this.game = new VideoGame();
+        games = new ArrayList<>();
         //Default Values for default constructor
         //Set both company and console name to null and null
         this.company = null;
@@ -229,122 +229,6 @@ public class System {
         }
     }
 
-    //Add Method - adds videogame object(s) to system object
-    public void add(VideoGame videoGame) {
-    
-        // 1. IS IT NULL?
-        // 2. IS IT VALID?
-        if( videoGame == null || !videoGame.isValid(cost) ) {
-            
-            
-            
-        }
-        else if( games.contains(videoGame) ) {
-            
-            
-        }
-        else {
-            games.add( videoGame );
-        }
-
-//        //Variable to track if game is already in the list
-//        boolean contains = false;
-//
-//        //for int i = game size - 1 , i greater then 0, i --
-//        for (int i = 0; i < this.games.size(); i++) {
-//
-//            //if games .get at i equals video game do this
-//            if (games.get(i).equals(videoGame)) {
-//
-//                //contains equals true , say duplicate and remove
-//                contains = true;
-//                java.lang.System.out.println("Duplicate");
-//                this.games.remove(i);
-//
-//            }
-//        }
-//
-//        //If valid method checks to see if null , and if it has the base amount of properties needed in order to be a videogame and it can't contain duplicate
-//        if (contains == false && game.isValid(videoGame)) {
-//
-//            //add game to array
-//            this.games.add(videoGame);
-//
-//            //tells user it was successfull
-//            java.lang.System.out.println("Successfully added");
-//
-//            //else
-//        } else {
-//
-//            //Trace message / fail
-//            java.lang.System.out.println("failed - not valid, does not exist");
-//
-//        }
-
-        //return array of games
-        return this.games;
-
-    }
-
-    //Removal Method - removes videogame object(s) to system object
-    public ArrayList<VideoGame> remove(Object videoGame) {
-
-        //Variable to track if game is already in the list
-        boolean contains = false;
-
-        //for loop that iterates through the array to find 
-        for (int i = 0; i < games.size(); i++) {
-
-            //if statement thats gets all games
-            if (games.get(i).equals(videoGame)) {
-
-                contains = true;
-                java.lang.System.out.println("Removed");
-                this.games.remove(videoGame);
-
-                //else statement  
-            } else {
-
-                java.lang.System.out.println("Could not find it");
-                throw new IllegalArgumentException();
-
-            }
-        }
-
-        //returns list without removed videogames     
-        return this.games;
-
-    }
-
-    //Get Method
-    public ArrayList<VideoGame> get(Object videoGame) {
-
-        //Variable to track if game is already in the list
-        boolean contains = false;
-
-        //for loop that iterates through the array to find 
-        for (int i = 0; i < games.size(); i++) {
-
-            //if statement thats gets all games
-            if (games.get(i).equals(videoGame)) {
-
-                contains = true;
-                java.lang.System.out.println("Gets");
-                this.games.get(i);
-
-                //else statement  
-            } else {
-
-                java.lang.System.out.println("Could not find it");
-
-            }
-        }
-
-        //returns list without removed videogames     
-        return this.games;
-
-    }
-
     //Can't tell user the data that is stored from video game
     public void setStoredVideoGameData(String storedVideoGameData) {
 
@@ -352,6 +236,71 @@ public class System {
         if (!(storedVideoGameData.isEmpty())) {
             this.storedVideoGameData = storedVideoGameData;
         }
+    }
+
+    //Add Method - adds videogame object(s) to system object
+    public void add(VideoGame videoGame) {
+        //Checks to see if its not null or if its valid and if not sends message say "cant add"
+        if (videoGame == null || !videoGame.isValid(videoGame)) {
+
+            java.lang.System.out.println("Invalid Object - Can't add");
+
+        } //Checks to see if theirs duplicate - if there is - don't add and tell user
+        else if (games.contains(videoGame)) {
+
+            java.lang.System.out.println("Duplicate!");
+
+        } //Finally if all the statements are false - no duplicate , not null , is valid add game
+        else {
+            java.lang.System.out.println("Succesfully Added!");
+            games.add(videoGame);
+        }
+
+    }
+
+    //Removal Method - removes videogame object(s) to system object
+    public void remove(VideoGame videoGame) {
+
+        //if statement thats gets all games
+        if (games.contains(videoGame)) {
+
+            //Print out "Removed"
+            java.lang.System.out.println("Removed");
+
+            //Remove game from list
+            games.remove(videoGame);
+
+            //else statement  
+        } else {
+
+            //Could not find - print it out (doesnt exist)
+            java.lang.System.out.println("Could not find it");
+
+        }
+
+    }
+
+    //Get Method
+    public void get(VideoGame videoGame) {
+
+        //Variables
+        int index;
+
+        //if statement thats gets all games
+        if (games.contains(videoGame)) {
+
+            index = games.indexOf(videoGame);
+
+            java.lang.System.out.println(games.get(index));
+
+            //else statement  
+        } else {
+
+            //Could not find in list - to tell user (prints it out)
+            java.lang.System.out.println("Could not find it");
+
+        }
+
     }
 
     //To String Method
@@ -363,7 +312,7 @@ public class System {
         //Formats The Output nicely, this.company refers to company name + Company with curly braces and if no info dont give object name
         if (this.company == null) {
 
-            result.append("Company {" + "\n");
+            result.append("\n" + "Company {" + "\n");
 
         } else {
 
@@ -371,7 +320,7 @@ public class System {
 
         }
         //Specifically tells user, the company name
-        result.append("Company Name : ").append(this.company).append("\n");
+        result.append("Company Name : ").append("N/A").append("\n");
 
         //Tells user the console
         result.append("Console : ").append(this.console).append("\n");
@@ -386,7 +335,7 @@ public class System {
         result.append("Date Released : ").append(this.dateReleased).append("\n");
 
         //Tells user the cost of the game
-        result.append("Cost of the game ").append(this.cost).append("\n" + "}" + "\n");
+        result.append("Cost of the System : ").append(this.cost).append("\n" + "}" + "\n");
 
         return result.toString();
 
@@ -478,48 +427,45 @@ public class System {
     }
 
     //IsValid Method (Checks to see if minimum requirements have been set)
-    public boolean isValid(Object obj) {
-
-        //Creates the object in order to check its properties
-        System other = (System) obj;
+    public boolean isValid(System system) {
 
         //A System needs a console , company , isConsole to be set to true, dateReleased and cost 
         //Checks to see if console is set - if not then it will set to null (invalid)
-        if (other.console == null) {
+        if (system.console == null) {
 
-            java.lang.System.out.println("Invalid Object - properties don't make sense");
+            java.lang.System.out.println("Invalid System Object - properties don't make sense");
             return false;
 
         }
 
         //Checks to see if type of company is set - if not then it will be set null (invalid)
-        if (other.company == null) {
+        if (system.company == null) {
 
-            java.lang.System.out.println("Invalid Object - properties don't make sense");
+            java.lang.System.out.println("Invalid System Object - properties don't make sense");
             return false;
 
         }
 
         //Checks to see if "isConsole" is set to true - if not then it will be set false (invalid)
-        if ((other.isConsole == false)) {
+        if ((system.isConsole == false)) {
 
-            java.lang.System.out.println("Invalid Object - properties don't make sense");
+            java.lang.System.out.println("Invalid System Object - properties don't make sense");
             return false;
 
         }
 
         //Checks to see if year Released is set  - if not then it will be set null(invalid)
-        if (other.dateReleased == null) {
+        if (system.dateReleased == null) {
 
-            java.lang.System.out.println("Invalid Object - properties don't make sense");
+            java.lang.System.out.println("Invalid System Object - properties don't make sense");
             return false;
 
         }
 
         //Checks to see if cost is set - if not then it will be set to 0 (invalid)
-        if (other.cost == 0) {
+        if (system.cost == 0) {
 
-            java.lang.System.out.println("Invalid Object - properties don't make sense");
+            java.lang.System.out.println("Invalid System Object - properties don't make sense");
             return false;
 
         }

@@ -33,7 +33,7 @@ public class VideoGameTester {
         VideoGame game = new VideoGame();
         System system = new System();
 
-        //Post Condition 
+        // Post Condition 
         java.lang.System.out.println(game + "\n");
         java.lang.System.out.println(system + "\n");
 
@@ -44,9 +44,6 @@ public class VideoGameTester {
         VideoGame games = new VideoGame();
 
         System systems = new System();
-
-        //VideoGame
-        assert (games.getConsoles() == null);
 
         assert (games.getTypeofGame() == null);
 
@@ -60,9 +57,6 @@ public class VideoGameTester {
 
         assert (game.getdateReleased() == null);
 
-        //System
-        assert (system.getCompany() == null);
-
         assert (system.getConsole() == null);
 
         assert (system.getIsConsole() == false);
@@ -71,19 +65,16 @@ public class VideoGameTester {
 
         assert (system.getdateReleased() == null);
 
-        //Test #2 : isValid()
-        //VideoGame
+//    Test #2 : isValid()
+//    VideoGame
         games.isValid(games);
-
         java.lang.System.out.println();
-        //Sysem
 
         system.isValid(system);
 
         java.lang.System.out.println("----------------------------------------------");
 
         java.lang.System.out.println("Test # 2  - isValid()");
-
         //System
         System playstation = new System();
         playstation.setConsole("PLAYSTATION");
@@ -97,7 +88,6 @@ public class VideoGameTester {
         playstation.setCost(100);
 
         playstation.isValid(playstation);
-
         java.lang.System.out.println();
 
         //VideoGame
@@ -123,32 +113,34 @@ public class VideoGameTester {
 
         //Test #3 : Add(..)
         java.lang.System.out.println("\n" + "Adding invalid 'videogame'");
-
         system.add(games);
-
         //Empty
         VideoGame gam = new VideoGame();
 
         java.lang.System.out.println();
 
         system.add(gam);
-
         java.lang.System.out.println("\n" + "Test #3 - add(..) invalid Triangle" + "\n");
-
         VideoGame ga = new VideoGame();
 
         ga.setCosts(0);
         ga.setIsAvailable(false);
         ga.setRating(-1);
-        
+
         system.add(ga);
-
-        java.lang.System.out.println();
-
         //Test #4 : add(..) - adding a valid object - created a valid system - playstation and added valid game call of duty
         java.lang.System.out.println("\n" + "Test #3 - add(..) Valid Triangle" + "\n");
         playstation.add(callofduty);
-        
+
+        //Testing Get
+        playstation.get(callofduty);
+
+        //Testing for duplicate
+        java.lang.System.out.println("\n" + "Checks duplicate");
+        playstation.add(callofduty);
+
+        //Testing remove
+        playstation.remove(callofduty);
 
     }
 
