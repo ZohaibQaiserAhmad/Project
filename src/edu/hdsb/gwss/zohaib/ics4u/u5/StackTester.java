@@ -5,6 +5,9 @@
  */
 package edu.hdsb.gwss.zohaib.ics4u.u5;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  *
  * @author 1ahmadzoh
@@ -19,8 +22,9 @@ public class StackTester {
         
         Stack stack = new Stack();
         
+        stack.setData(5);
         
-        
+        System.out.println(Arrays.toString(stack.getData()));
         
         
     }

@@ -24,6 +24,7 @@ public class Stack {
     private int[] data;
 
     //Variables
+    public final int DEFAULT_SIZE = 5;
     private int top;
     private int size;
 
@@ -34,18 +35,21 @@ public class Stack {
     }
 
     //Sets value of data
-    public void setData(int data) {
+    public void setData(int number) {
 
-        this.data[size] = data;
+        data[0] = number;
+        size++;
 
     }
 
     //Default constructor
     public Stack() {
-        
-        top = -1;
       
-
+        this.size = 10;
+        this.data = new int[size];
+        top = -1;
+        
+        
     }
 
     //Determines top
