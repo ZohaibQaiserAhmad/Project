@@ -5,7 +5,6 @@
  */
 package edu.hdsb.gwss.zohaib.ics4u.u5;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -18,15 +17,38 @@ public class StackTester {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      
-        
+
         Stack stack = new Stack();
+
+        assert (stack.isEmpty());
+        assert (stack.top() == -1);
+        assert (stack.pop() == -1);
+        assert (stack.size() == 0);
+        assert (stack.capacity() == Stack.DEFAULT_SIZE);
+
+        stack.push(5);
+        stack.push(5);
+        stack.push(5);
+        stack.push(5);
+        stack.push(5);
         
-        stack.setData(5);
+        stack.makeEmpty();
         
-        System.out.println(Arrays.toString(stack.getData()));
-        
-        
+
+//        public int top();
+//
+//    public int pop();
+//
+//    public void push( int value );
+//
+//    
+//    public int capacity();
+//
+//    public boolean isEmpty();
+//    
+//    public boolean isFull();
+//
+//    public void makeEmpty();
     }
-    
+
 }
