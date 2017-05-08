@@ -3,9 +3,9 @@
 
  +* Name: Zohaib Ahmad
  +
- + * Date : Wednesday , May 3rd
+ + * Date : Monday , May 8rd
  +
- + * Version : v0.03
+ + * Version : v0.04
  +
  +  * Description : Stack data structure
 
@@ -31,6 +31,7 @@ public class Stack implements StackInterface {
     //Default constructor
     public Stack() {
         this(DEFAULT_SIZE);
+
     }
 
     public Stack(int capacity) {
@@ -65,8 +66,13 @@ public class Stack implements StackInterface {
     @Override
     public void push(int value) {
 
-        this.data = new int[value];
-        this.top = value;
+        int top = this.top();
+        if (this.capacity() != this.size()) {
+
+            this.top ++;
+            this.data[top] = value;
+
+        }
 
     }
 
@@ -97,13 +103,22 @@ public class Stack implements StackInterface {
     @Override
     public void makeEmpty() {
 
-       while(size() > 0){
-           
-           
-           
-           
-       }
-        
+        while (top != -1) {
+
+            top--;
+
+        }
+
+    }
+
+    public void print() {
+
+        for (int i = 0; i < data.length; i++) {
+
+            System.out.println(data[i]);
+
+        }
+
     }
 
 }

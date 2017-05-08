@@ -20,22 +20,28 @@ public class StackTester {
 
         Stack stack = new Stack();
 
-        assert (stack.isEmpty());
-        assert (stack.top() == -1);
-        assert (stack.pop() == -1);
-        assert (stack.size() == 0);
-        assert (stack.capacity() == Stack.DEFAULT_SIZE);
-
-        stack.push(5);
-        stack.push(5);
-        stack.push(5);
-        stack.push(5);
-        stack.push(5);
+      assert (stack.top() == -1);
+      assert (stack.pop() == -1);
+     assert (stack.size() == 0);
+     assert (stack.capacity() == Stack.DEFAULT_SIZE);
+      assert (stack.isEmpty());
+       
+      
+      Stack stacks = new Stack(1);
+       
+      stacks.pop();
+       stacks.print();
+       
+      
         
-        stack.makeEmpty();
-        
+    
+        System.out.println(stacks.isEmpty());
 
-//        public int top();
+       
+
+        System.out.println(stacks.isFull());
+
+//    public int top();
 //
 //    public int pop();
 //
