@@ -12,8 +12,6 @@
  */
 package edu.hdsb.gwss.zohaib.ics4u.u5;
 
-import java.util.Arrays;
-
 /**
  *
  * @author 1ahmadzoh
@@ -42,6 +40,7 @@ public class Stack implements StackInterface {
     }
 
     //Determines top
+    @Override
     public int top() {
 
         if (this.isEmpty()) {
@@ -54,23 +53,34 @@ public class Stack implements StackInterface {
 
     @Override
     public int pop() {
+
         if (this.isEmpty()) {
+
+            System.out.println("Stack is empty!");
             return -1;
+
         } else {
-            int top = this.top();
-            this.top--;
-            return top;
+
+            top--;
+            
+            System.out.println("The new top is : ");
+            return data[top];
+
         }
+
     }
 
     @Override
     public void push(int value) {
 
-        int top = this.top();
-        if (this.capacity() != this.size()) {
+        if (top != this.capacity() - 1) {
 
-            this.top ++;
-            this.data[top] = value;
+            top = top + 1;
+            data[top] = value;
+
+        } else {
+
+            System.out.println("Stack is full!");
 
         }
 
@@ -113,7 +123,9 @@ public class Stack implements StackInterface {
 
     public void print() {
 
-        for (int i = 0; i < data.length; i++) {
+        int x = this.size();
+
+        for (int i = 0; i < x; i++) {
 
             System.out.println(data[i]);
 
