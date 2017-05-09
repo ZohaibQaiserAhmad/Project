@@ -28,6 +28,7 @@ public class Stack implements StackInterface {
 
     //Default constructor
     public Stack() {
+        
         this(DEFAULT_SIZE);
 
     }
@@ -88,7 +89,9 @@ public class Stack implements StackInterface {
 
     @Override
     public int size() {
+        
         return this.top + 1;
+        
     }
 
     @Override
