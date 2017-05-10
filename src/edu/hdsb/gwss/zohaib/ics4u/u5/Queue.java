@@ -55,11 +55,20 @@ public class Queue implements QueueInterface {
 
     @Override
     public void enqueue(int value) {
-      
         
         
-        
-        
+        if(this.isFull()){
+            
+            System.out.println("Full!");
+            
+        } else {
+            
+            rear++;
+            
+            
+        }
+       
+
     }
 
     @Override
@@ -69,16 +78,21 @@ public class Queue implements QueueInterface {
 
     @Override
     public int size() {
-       
-        return 0;
-        
+        if (front > rear) {
+            return front - rear + 1;
+        } else if (front > rear) {
+            return this.capacity() - rear + front + 1;
+        } else {
+            return 0;
+        }
+
     }
 
     @Override
     public int capacity() {
-       
+
         return this.queArray.length;
-        
+
     }
 
     @Override
@@ -88,18 +102,14 @@ public class Queue implements QueueInterface {
 
     @Override
     public boolean isFull() {
-        
-        
-    return false;
-        
-        
+
+      return this.capacity() == this.size();
+
     }
 
     @Override
     public void makeEmpty() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-  
 
 }
