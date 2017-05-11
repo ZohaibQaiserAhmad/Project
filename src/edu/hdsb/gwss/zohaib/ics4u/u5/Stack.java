@@ -101,11 +101,11 @@ public class Stack implements StackInterface {
 
     @Override
     public boolean isEmpty() {
-        if (this.top == -1) {
-            return true;
-        } else {
-            return false;
-        }
+        
+        return this.top == -1;
+        
+        
+        
     }
 
     @Override

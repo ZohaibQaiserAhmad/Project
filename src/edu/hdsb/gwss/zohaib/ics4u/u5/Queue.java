@@ -55,25 +55,52 @@ public class Queue implements QueueInterface {
 
     @Override
     public void enqueue(int value) {
-        
-        
-        if(this.isFull()){
-            
+
+        if (this.isFull()) {
+
             System.out.println("Full!");
-            
+
         } else {
-            
+
             rear++;
-            
-            
+
+            if (rear == this.capacity() - 1) {
+
+                rear = 0;
+
+            }
+
+            queArray[rear] = value;
+
+            System.out.println("Added!");
+
         }
-       
 
     }
 
     @Override
     public int dequeue() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        if (this.isEmpty()) {
+
+            System.out.println("Empty!");
+
+        } else {
+
+            front++;
+
+            if (front == this.capacity() - 1) {
+
+                System.out.println("Removed!");
+                front = 0;
+                return queArray[front];
+
+            }
+
+        }
+        front --;
+        return queArray[front];
+
     }
 
     @Override
@@ -97,19 +124,34 @@ public class Queue implements QueueInterface {
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+        return front == 0;
+        
+        
     }
 
     @Override
     public boolean isFull() {
 
-      return this.capacity() == this.size();
+        return this.capacity() == this.size();
 
     }
 
     @Override
     public void makeEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        if(rear > front){
+            
+            while(rear )
+            
+            
+            
+        }
+        
+        
+        
+        
     }
 
 }
