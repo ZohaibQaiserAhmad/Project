@@ -5,12 +5,15 @@ package edu.hdsb.gwss.zohaib.ics4u.u5;
  */
 public interface QueueInterface {
     
+    //done
     public int front();
     
+    //done
     public int back();
     
     public void enqueue( int value );
-
+    
+    //done
     public int dequeue();
 
     public int size();

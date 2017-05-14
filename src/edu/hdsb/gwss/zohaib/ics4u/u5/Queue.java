@@ -3,9 +3,9 @@
 
  +* Name: Zohaib Ahmad
  +
- + * Date : Tuesday , May 9th
+ + * Date : Sunday , May 14
  +
- + * Version : v0.01
+ + * Version : v0.02
  +
  +  * Description : Queue data structure
 
@@ -25,7 +25,7 @@ public class Queue implements QueueInterface {
 
     //Variables    
     private int front;
-    private int rear;
+    private int back;
 
     //Default constructor
     public Queue() {
@@ -37,7 +37,7 @@ public class Queue implements QueueInterface {
     public Queue(int capacity) {
 
         front = 0;
-        rear = -1;
+        back = -1;
 
         queArray = new int[capacity];
 
@@ -45,12 +45,24 @@ public class Queue implements QueueInterface {
 
     @Override
     public int front() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        if (this.isEmpty()) {
+            return -1;
+        } else {
+            return this.queArray[this.front];
+        }
+
     }
 
     @Override
     public int back() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        if (this.isEmpty()) {
+            return -1;
+        } else {
+            return this.queArray[this.back];
+        }
+
     }
 
     @Override
@@ -62,17 +74,16 @@ public class Queue implements QueueInterface {
 
         } else {
 
-            rear++;
+            back++;
 
-            if (rear == this.capacity() - 1) {
+            if (back == this.capacity() - 1) {
 
-                rear = 0;
+                back = 0;
 
             }
 
-            queArray[rear] = value;
-
-            System.out.println("Added!");
+            queArray[back] = value;
+          
 
         }
 
@@ -83,7 +94,7 @@ public class Queue implements QueueInterface {
 
         if (this.isEmpty()) {
 
-            System.out.println("Empty!");
+            return - 1;
 
         } else {
 
@@ -91,25 +102,28 @@ public class Queue implements QueueInterface {
 
             if (front == this.capacity() - 1) {
 
-                System.out.println("Removed!");
                 front = 0;
                 return queArray[front];
 
             }
 
         }
-        front --;
+        front--;
         return queArray[front];
 
     }
 
     @Override
     public int size() {
-        if (front > rear) {
-            return front - rear + 1;
-        } else if (front > rear) {
-            return this.capacity() - rear + front + 1;
+        if (front > back) {
+
+            return front - back + 1;
+
+        } else if (front > back) {
+
+            return this.capacity() - back + front + 1;
         } else {
+
             return 0;
         }
 
@@ -124,11 +138,9 @@ public class Queue implements QueueInterface {
 
     @Override
     public boolean isEmpty() {
-        
-        
-        return front == 0;
-        
-        
+
+        return front == 0 && back == -1;
+
     }
 
     @Override
@@ -140,18 +152,27 @@ public class Queue implements QueueInterface {
 
     @Override
     public void makeEmpty() {
-       
-        if(rear > front){
-            
-            while(rear )
-            
-            
-            
+
+        while (back != -1) {
+
+            back--;
+
         }
-        
-        
-        
-        
+
+        while (front != 0) {
+
+            front--;
+
+        }
+
+    }
+
+    public void print() {
+
+        for (int i = front; i <= back; i++) {
+            System.out.print(queArray[i] + " ");
+        }
+        System.out.println();
     }
 
 }
