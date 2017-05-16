@@ -40,12 +40,8 @@ public class QueTester {
 
         ques.enqueue(50);
         ques.enqueue(50);
-        ques.enqueue(50);
-        ques.enqueue(50);
-      
-       
 
-        ques.print();
+        System.out.println(ques.size());
 
         ques.print();
 

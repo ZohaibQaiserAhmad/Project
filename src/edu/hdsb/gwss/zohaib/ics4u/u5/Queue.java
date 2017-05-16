@@ -3,9 +3,9 @@
 
  +* Name: Zohaib Ahmad
  +
- + * Date : Sunday , May 14
+ + * Date : Monday , May 16
  +
- + * Version : v0.02
+ + * Version : v0.03
  +
  +  * Description : Queue data structure
 
@@ -75,15 +75,16 @@ public class Queue implements QueueInterface {
         } else {
 
             back++;
+            queArray[back] = value;
+            System.out.println(queArray[back]);
 
             if (back == this.capacity() - 1) {
 
                 back = 0;
+                queArray[back] = value;
+                System.out.println(queArray[back]);
 
             }
-
-            queArray[back] = value;
-          
 
         }
 
@@ -119,12 +120,17 @@ public class Queue implements QueueInterface {
 
             return front - back + 1;
 
-        } else if (front > back) {
+        } else if (back > front) {
 
             return this.capacity() - back + front + 1;
-        } else {
+        } else if (front == back) {
 
             return 0;
+
+        } else {
+
+            return -1;
+
         }
 
     }
@@ -170,7 +176,7 @@ public class Queue implements QueueInterface {
     public void print() {
 
         for (int i = front; i <= back; i++) {
-            System.out.print(queArray[i] + " ");
+            System.out.print(queArray[i] + "   ");
         }
         System.out.println();
     }
