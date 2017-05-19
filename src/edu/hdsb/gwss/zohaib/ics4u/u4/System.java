@@ -102,6 +102,18 @@ public class System {
         this.cost = 0;
 
     }
+    
+    //Advanced : System (constructor)
+    public System(VideoGame videoGame , String company , String console , boolean isConsole , boolean stillManufactured , int yearReleased , int monthReleased , int dayReleased ){
+        
+       //Creates a new arraylist everytime a system is created for games
+       games = new ArrayList<>();
+     
+       //
+       this(videoGame , company , console , isConsole , stillManufactured , yearReleased , monthReleased , dayReleased , dayReleased);
+        
+        
+    }
 
     //Primary Key : A company cannot have the same id as another
     public String getCompany() {

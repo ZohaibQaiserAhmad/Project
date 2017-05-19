@@ -6,9 +6,9 @@ import java.util.Objects;
 
  +* Name: Zohaib Ahmad
  +
- + * Date : Monday , May 1st
+ + * Date : Monday , May 19th
  +
- + * Version : v0.03
+ + * Version : v0.04
  +
  +  * Description : Creates a class of which is the child to System and has a 1..N relationship.
 
@@ -82,29 +82,48 @@ public class VideoGame {
     private static final int MINIMUM_COST = 5;
     private static final int MAXIMUM_COST = 80;
 
+    //Default constructor (constructor one)
     public VideoGame() {
+        
+        //Had used constructor with set values to create new values for default constructor
+        this( null, null, false, false, 0, 0, 0, 0, 0, 0  );
+    }
 
-        //Default values for default constructor
-        //Type of game set to null , name set to null
-        this.typeofGame = null;
-        this.name = null;
+    //Constructor two - custom for type of game and name (basic)
+    public VideoGame(String typeofgame, String name) {
+        
+        
+        //Had used constructor with set values to create new values for basic constructor
+        this( typeofgame, name, false, false, 0, 0, 0, 0, 0, 0  );
+    }
 
-        //isGame set to false  and available false
-        this.isGame = false;
-        this.isAvailable = false;
+    //Constructor three - custom allows all information to be inputed (advanced) : will be used to set other constructors
+    public VideoGame(String typeofgame, String name, boolean isGame,
+             boolean isAvailable, int rating, int copiessold, int releasedDay,
+            int releasedMonth, int releasedYear, int cost) {
 
-        //rating set to 0 , copies sold set to 0
-        this.rating = 0;
-        this.numberOfCopiesSold = 0;
+        //Type of game set to argument , name set to argument
+        this.typeofGame = typeofgame;
+        this.name = name;
 
-        //Day set to 0 , month set to 0 out of 12 months , year set to 0
-        this.releasedDay = 0;
-        this.releasedMonth = 0;
-        this.releasedYear = 0;
+        //isGame set to argument  and available argument
+        this.isGame = isGame;
+        this.isAvailable = isAvailable;
+
+        //rating set to argument and numberofcopiessold to argument
+        this.rating = rating;
+        this.numberOfCopiesSold = copiessold;
+
+        //Day set to 0 , month set to argument (0-12) out of 12 months , year set to argument
+        this.releasedDay = releasedDay;
+        this.releasedMonth = releasedMonth;
+        this.releasedYear = releasedYear;
 
         //Sets date after setting day/month/year
-        this.releasedDate = null;
-        this.costs = 0;
+        this.releasedDate = releasedDay + " : " + releasedMonth + " : " + releasedYear;
+
+        //Sets to argument
+        this.costs = cost;
 
     }
 

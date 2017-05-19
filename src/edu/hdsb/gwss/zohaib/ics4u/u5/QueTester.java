@@ -36,8 +36,11 @@ public class QueTester {
         assert (que.dequeue() == -1);
 
         //Creates a stack with non default size
-        Queue ques = new Queue(4);
+        Queue ques = new Queue(6);
 
+        ques.enqueue(50);
+        ques.enqueue(50);
+        
         ques.enqueue(50);
         ques.enqueue(50);
 
