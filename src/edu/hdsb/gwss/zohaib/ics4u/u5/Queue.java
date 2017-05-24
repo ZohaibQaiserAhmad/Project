@@ -78,7 +78,7 @@ public class Queue implements QueueInterface {
             queArray[back] = value;
             System.out.println(queArray[back]);
 
-            if (back == this.capacity() - 1) {
+            if (back == this.capacity()) {
 
                 back = 0;
                 queArray[back] = value;

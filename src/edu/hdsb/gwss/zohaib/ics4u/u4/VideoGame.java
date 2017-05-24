@@ -84,22 +84,21 @@ public class VideoGame {
 
     //Default constructor (constructor one)
     public VideoGame() {
-        
+
         //Had used constructor with set values to create new values for default constructor
-        this( null, null, false, false, 0, 0, 0, 0, 0, 0  );
+        this(null, null, false, false, 0, 0, 0, 0, 0, 0);
     }
 
     //Constructor two - custom for type of game and name (basic)
     public VideoGame(String typeofgame, String name) {
-        
-        
+
         //Had used constructor with set values to create new values for basic constructor
-        this( typeofgame, name, false, false, 0, 0, 0, 0, 0, 0  );
+        this(typeofgame, name, false, false, 0, 0, 0, 0, 0, 0);
     }
 
     //Constructor three - custom allows all information to be inputed (advanced) : will be used to set other constructors
     public VideoGame(String typeofgame, String name, boolean isGame,
-             boolean isAvailable, int rating, int copiessold, int releasedDay,
+            boolean isAvailable, int rating, int copiessold, int releasedDay,
             int releasedMonth, int releasedYear, int cost) {
 
         //Type of game set to argument , name set to argument
@@ -119,8 +118,16 @@ public class VideoGame {
         this.releasedMonth = releasedMonth;
         this.releasedYear = releasedYear;
 
-        //Sets date after setting day/month/year
-        this.releasedDate = releasedDay + " : " + releasedMonth + " : " + releasedYear;
+        //Sets date after setting year/day/month
+        if (releasedYear != 0 && releasedDay != 0 && releasedMonth != 0) {
+
+            this.releasedDate = releasedDay + " / " + releasedMonth + " / " + releasedYear;
+
+        } else {
+
+            this.releasedDate = null;
+
+        }
 
         //Sets to argument
         this.costs = cost;
@@ -260,7 +267,7 @@ public class VideoGame {
         }
 
         //Sets date after setting day/month/year
-        this.releasedDate = dayReleased + " : " + monthReleased + " : " + yearReleased;
+        this.releasedDate = dayReleased + " / " + monthReleased + " / " + yearReleased;
 
     }
 

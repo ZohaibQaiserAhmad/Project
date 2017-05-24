@@ -74,45 +74,54 @@ public class System {
     //Array to add game(s)
     private ArrayList<VideoGame> games;
 
+    //Game that will be added to each system
     VideoGame game;
 
     //Syntax to creating default constructor
     public System() {
 
-        this.game = new VideoGame();
-        games = new ArrayList<>();
-        //Default Values for default constructor
-        //Set both company and console name to null and null
-        this.company = null;
-        this.console = null;
-
-        //Set isConsole and stillManufactured to false
-        this.isConsole = false;
-        this.stillManufactured = false;
-
-        //Set yearReleased and cost to 0 and 0
-        this.yearReleased = 0;
-        this.monthReleased = 0;
-        this.dayReleased = 0;
-
-        //Sets date after setting year/day/month
-        this.dateReleased = null;
-
-        //Sets cost to 0 
-        this.cost = 0;
+        //Had used constructor with set values to create new values for default constructor
+        this(null, null, false, false, 0, 0, 0, 0);
 
     }
-    
+
     //Advanced : System (constructor)
-    public System(VideoGame videoGame , String company , String console , boolean isConsole , boolean stillManufactured , int yearReleased , int monthReleased , int dayReleased ){
-        
-       //Creates a new arraylist everytime a system is created for games
-       games = new ArrayList<>();
-     
-       //
-       this(videoGame , company , console , isConsole , stillManufactured , yearReleased , monthReleased , dayReleased , dayReleased);
-        
-        
+    public System(String company, String console, boolean isConsole, boolean stillManufactured,
+            int cost, int yearReleased, int monthReleased, int dayReleased) {
+
+        //Used to create a new arraylist of videogames for each system
+        games = new ArrayList<>();
+
+        //Sets videogame to argument
+        this.game = new VideoGame();
+
+        //Sets company and console to arguments
+        this.company = company;
+        this.console = console;
+
+        //Set isConsole and stillManufactured to argument
+        this.isConsole = isConsole;
+        this.stillManufactured = stillManufactured;
+
+        //Set yearReleased and cost to arguments
+        this.yearReleased = yearReleased;
+        this.monthReleased = monthReleased;
+        this.dayReleased = dayReleased;
+
+        //Sets date after setting year/day/month
+        if (yearReleased != 0 && dayReleased != 0 && monthReleased != 0) {
+
+            this.dateReleased = dayReleased + " / " + monthReleased + " / " + yearReleased;
+
+        } else {
+
+            this.dateReleased = null;
+
+        }
+
+        //Sets cost to argument 
+        this.cost = cost;
+
     }
 
     //Primary Key : A company cannot have the same id as another
@@ -150,6 +159,20 @@ public class System {
             //Sets console if the statement returns true
             this.console = console;
 
+        }
+    }
+
+    //Returns Game
+    public VideoGame getGame() {
+        return game;
+    }
+
+    //Sets game
+    public void setGame(VideoGame game) {
+
+        //If game is valid then set it - has all properties that is needed to make it a game
+        if (game.isValid(game)) {
+            this.game = game;
         }
     }
 
@@ -293,25 +316,34 @@ public class System {
     }
 
     //Get Method
-    public void get(VideoGame videoGame) {
+    public void get(String typeofgame, String name, boolean isGame,
+            boolean isAvailable, int rating, int copiessold, int releasedDay,
+            int releasedMonth, int releasedYear, int cost) {
+            
+            boolean found = false;
+       
+            //Loop to check for if a game has the properties that match
+            for(int i = 0 ; i < games.size() ; i++ ){
+                
+                
+               
+                
+                
+                
+                
+                
+            }
+             
+       
+      
 
-        //Variables
-        int index;
-
-        //if statement thats gets all games
-        if (games.contains(videoGame)) {
-
-            index = games.indexOf(videoGame);
-
-            java.lang.System.out.println(games.get(index));
-
-            //else statement  
-        } else {
+             
+       
 
             //Could not find in list - to tell user (prints it out)
             java.lang.System.out.println("Could not find it");
 
-        }
+       
 
     }
 
@@ -326,13 +358,15 @@ public class System {
 
             result.append("\n" + "Company {" + "\n");
 
+            result.append("Company Name : ").append("N/A").append("\n");
+
         } else {
 
             result.append(this.company).append("Company {" + "\n");
 
+            result.append("Company Name : ").append(this.company).append("\n");
+
         }
-        //Specifically tells user, the company name
-        result.append("Company Name : ").append("N/A").append("\n");
 
         //Tells user the console
         result.append("Console : ").append(this.console).append("\n");

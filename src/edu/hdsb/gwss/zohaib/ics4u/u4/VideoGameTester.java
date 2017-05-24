@@ -62,9 +62,8 @@ public class VideoGameTester {
         assert (system.getIsConsole() == false);
 
         assert (system.getCost() == 0);
-
+        
         assert (system.getdateReleased() == null);
-
 //    Test #2 : isValid()
 //    VideoGame
         games.isValid(games);
@@ -129,11 +128,11 @@ public class VideoGameTester {
 
         system.add(ga);
         //Test #4 : add(..) - adding a valid object - created a valid system - playstation and added valid game call of duty
-        java.lang.System.out.println("\n" + "Test #3 - add(..) Valid Triangle" + "\n");
+
         playstation.add(callofduty);
 
         //Testing Get
-        playstation.get(callofduty);
+        playstation.get(callofduty.getName());
 
         //Testing for duplicate
         java.lang.System.out.println("\n" + "Checks duplicate");
@@ -141,9 +140,17 @@ public class VideoGameTester {
 
         //Testing remove
         playstation.remove(callofduty);
+
+        System systemz = new System("Playstation", "PS4", true, true,
+                60, 2015, 6, 5);
+
+        callofduty.toString();
+
+        systemz.add(callofduty);
         
-       
-        
+        systemz.get(callofduty.getName());
+
+        java.lang.System.out.println(systemz.getGame());
 
     }
 
