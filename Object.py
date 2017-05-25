@@ -6,48 +6,37 @@
 
 # Description : Simple Object
 
-class VideoGame(object):
-    # A Videogame has a console
-
-    # A Videogame has restricted consoles
-
-    # A Videogame has a company
-
-    # A Videogame has a name
-
-
-
-
-
-
+class VideoGame:
     # Constructor
-    def _init_(self):
-
-        self._name = None
-        self._console = None
-
-        self._company = None
-        self._restricted = None
+    def __init__(self, name, console, company, restricted):
+        
+        self.restricted = restricted
+        self.company = company
+        self.console = console
+        self.name = name
 
     # Setter for name
-    def setname(self, name):
 
-        # Variables
+
+    def setname(self, name):
+    # Variables
         minimumcharacter = 5
         maximumcharacter = 25
 
-        # If name is above or equal to min(character) and less then or eqaul to max character then set name
-        if name >= minimumcharacter and name <= maximumcharacter:
-            self._name = name
+    # If name is above or equal to min(character) and less then or eqaul to max character then set name
+        if len(name) >= minimumcharacter and len(name) <= maximumcharacter:
+            self.name = name
 
-    # Getter for Name
+        # Getter for Name
+
+
     def getname(self):
-        return self._name
+        return self.name
 
-    # Setter for console
+
+# Setter for console
     def setconsole(self, console):
-
-        # Variables
+    # Variables
         hascompany = True
         hasname = True
 
@@ -57,48 +46,49 @@ class VideoGame(object):
         if hascompany == True and hasname == True and hascost == True and hasdatereleased == True:
             self.console = console
 
-    # Getter for console
+
+# Getter for console
 
     def getconsole(self):
+        return self.console
 
-        return self._console
 
-    # Setter for company
+# Setter for company
     def setcompany(self, company):
+    # Variables
+        minimum = 4
+        maximum = 50
 
-        # Variables
-        minimumcharacter = 4
-        maximumcharacter = 50
-
-        if company <= maximumcharacter and company >= minimumcharacter:
+        if len(company) >= minimum and len(company) <= maximum:
             self.company = company
 
-    # Getter for company
+
+# Getter for company
     def getcompany(self):
+        return self.company
 
-        return self._company
 
-    # Setter for restricted
-
+# Setter for restricted
     def setrestricted(self, restricted):
+        if restricted:
+            self.restricted = restricted
 
-        if restricted == True:
-            self._restricted = restricted
 
-    # Getter for restricted
+# Getter for restricted
 
     def getrestricted(self):
-
-        return self._restricted
-
+        return self.restricted
 
 
+# Method to convert to string
+    def __str__(self):
 
-
-
-
+        return "Name : {} , Company : {} , Console : {}, Restriction: {}".format(self.name, self.company, self.console, self.restricted)
 
 
 
+if __name__ == "__main__":
 
 
+#Shows Call of duty
+    print(callofduty)
