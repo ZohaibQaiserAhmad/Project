@@ -50,14 +50,15 @@ public class Stack implements StackInterface {
     @Override
     public int top() {
 
-        //If it is empty return a error - -1 to show invalid for empty
-        if (this.isEmpty()) {
-            return -1;
-
-            //Else return the arrays value at top
-        } else {
+        //As long  as the stack is not empty it will have a top
+        if (!this.isEmpty()) {
 
             return this.data[this.top];
+
+            //To account for empty (invalid return -1)
+        } else {
+
+            return -1;
 
         }
 
@@ -77,9 +78,6 @@ public class Stack implements StackInterface {
         } else {
 
             top--;
-
-            //Used to tell user new top value
-            System.out.println("The new top is : ");
 
             //returns array with new top value
             return data[top];
@@ -147,7 +145,7 @@ public class Stack implements StackInterface {
     //Method to make the array empty
     @Override
     public void makeEmpty() {
-        
+
         //While the top is not equal to -1 the bottom keep subtracting one from top
         while (top != -1) {
 
@@ -156,16 +154,16 @@ public class Stack implements StackInterface {
         }
 
     }
-    
+
     //Method to print out the array
     public void print() {
-        
+
         //Set the integer "x" to the size
         int x = this.size();
-        
+
         //For loop , i is set to 0 , while i is less then x increase i by one each time
         for (int i = 0; i < x; i++) {
-            
+
             //Print out the array at position i
             System.out.println(data[i]);
 

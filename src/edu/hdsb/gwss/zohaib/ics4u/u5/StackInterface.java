@@ -5,13 +5,13 @@ package edu.hdsb.gwss.zohaib.ics4u.u5;
  */
 public interface StackInterface {
     
-    //done
+    //done(tester done)
     public int top();
     
-    //done
+    //done ( tester done)
     public int pop();
     
-    //done
+    //done(tester done)
     public void push(int value);
     
     //done

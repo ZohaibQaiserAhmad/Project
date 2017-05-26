@@ -132,7 +132,7 @@ public class VideoGameTester {
         playstation.add(callofduty);
 
         //Testing Get
-        playstation.get(callofduty.getName());
+     //   playstation.get(callofduty.getName());
 
         //Testing for duplicate
         java.lang.System.out.println("\n" + "Checks duplicate");
@@ -148,7 +148,7 @@ public class VideoGameTester {
 
         systemz.add(callofduty);
         
-        systemz.get(callofduty.getName());
+      //  systemz.get(callofduty.getName());
 
         java.lang.System.out.println(systemz.getGame());
 
