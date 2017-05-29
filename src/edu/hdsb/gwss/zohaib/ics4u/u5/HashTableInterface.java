@@ -17,11 +17,11 @@ public interface HashTableInterface {
     
     public void resize();
     
-  //  public Student get( int key );
+ //public Student get( int key );
     
- //   public void put( int key, Student value);
+  //public void put( int key, Student value);
     
-  //  public boolean contains( Student value );
+ //public boolean contains( Student value );
     
     public boolean containsKey( int key );
     

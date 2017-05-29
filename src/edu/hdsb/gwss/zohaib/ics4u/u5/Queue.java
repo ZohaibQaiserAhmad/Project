@@ -18,6 +18,7 @@ package edu.hdsb.gwss.zohaib.ics4u.u5;
  */
 public class Queue implements QueueInterface {
 
+    //Creates a int to store default size for default constructor
     public static final int DEFAULT_SIZE = 5;
 
     //Array
@@ -26,6 +27,7 @@ public class Queue implements QueueInterface {
     //Variables    
     private int front;
     private int back;
+    private int capacitys;
 
     //Default constructor
     public Queue() {
@@ -36,8 +38,9 @@ public class Queue implements QueueInterface {
 
     public Queue(int capacity) {
 
-        front = 0;
+        front = -1;
         back = -1;
+        capacitys = capacity;
 
         queArray = new int[capacity];
 
@@ -46,7 +49,7 @@ public class Queue implements QueueInterface {
     @Override
     public int front() {
 
-        if (this.isEmpty()) {
+        if (front == -1) {
             return -1;
         } else {
             return this.queArray[this.front];
@@ -57,9 +60,12 @@ public class Queue implements QueueInterface {
     @Override
     public int back() {
 
-        if (this.isEmpty()) {
+        if (back == -1) {
+
             return -1;
+
         } else {
+
             return this.queArray[this.back];
         }
 
@@ -68,23 +74,20 @@ public class Queue implements QueueInterface {
     @Override
     public void enqueue(int value) {
 
-        if (this.isFull()) {
+        if ((back + 1) % capacitys == front) {
 
             System.out.println("Full!");
 
+        } else if (this.isEmpty()) {
+
+            back = 0;
+            front = 0;
+            queArray[back] = value;
+
         } else {
 
-            back++;
+            back = (back + 1) % capacitys;
             queArray[back] = value;
-            System.out.println(queArray[back]);
-
-            if (back == this.capacity()) {
-
-                back = 0;
-                queArray[back] = value;
-                System.out.println(queArray[back]);
-
-            }
 
         }
 
@@ -95,43 +98,28 @@ public class Queue implements QueueInterface {
 
         if (this.isEmpty()) {
 
-            return - 1;
+            return -1;
+
+        } else if (front == back) {
+
+            front = -1;
+            back = -1;
+
+            return -1;
 
         } else {
 
-            front++;
-
-            if (front == this.capacity() - 1) {
-
-                front = 0;
-                return queArray[front];
-
-            }
+            front = (front + 1) % capacitys;
+            return queArray[front];
 
         }
-        front--;
-        return queArray[front];
 
     }
 
     @Override
     public int size() {
-        if (front > back) {
 
-            return front - back + 1;
-
-        } else if (back > front) {
-
-            return this.capacity() - back + front + 1;
-        } else if (front == back) {
-
-            return 0;
-
-        } else {
-
-            return -1;
-
-        }
+        return (back + capacitys - front) % capacitys + 1;
 
     }
 
@@ -145,7 +133,7 @@ public class Queue implements QueueInterface {
     @Override
     public boolean isEmpty() {
 
-        return front == 0 && back == -1;
+        return front == -1 && back == -1;
 
     }
 
@@ -159,15 +147,9 @@ public class Queue implements QueueInterface {
     @Override
     public void makeEmpty() {
 
-        while (back != -1) {
+        while (!this.isEmpty()) {
 
-            back--;
-
-        }
-
-        while (front != 0) {
-
-            front--;
+            this.dequeue();
 
         }
 
@@ -175,10 +157,20 @@ public class Queue implements QueueInterface {
 
     public void print() {
 
-        for (int i = front; i <= back; i++) {
-            System.out.print(queArray[i] + "   ");
+        for (int i = 0; i < this.size(); i++) {
+
+            if (this.isEmpty()) {
+
+                System.out.println("Empty!");
+
+            } else {
+
+                System.out.println(queArray[i]);
+
+            }
+
         }
-        System.out.println();
+
     }
 
 }
