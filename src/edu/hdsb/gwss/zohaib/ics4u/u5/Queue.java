@@ -28,6 +28,7 @@ public class Queue implements QueueInterface {
     private int front;
     private int back;
     private int capacitys;
+    private int sizes;
 
     //Default constructor
     public Queue() {
@@ -119,7 +120,17 @@ public class Queue implements QueueInterface {
     @Override
     public int size() {
 
-        return (back + capacitys - front) % capacitys + 1;
+        //If it is full return the capacity
+        if (this.isFull()) {
+
+            sizes = this.queArray.length;
+            return sizes;
+
+        }
+
+        //Else use formula that will determine size for everything else
+        sizes = (back + capacitys - front) % capacitys + 1;
+        return sizes;
 
     }
 
@@ -140,7 +151,7 @@ public class Queue implements QueueInterface {
     @Override
     public boolean isFull() {
 
-        return this.capacity() == this.size();
+        return capacitys == sizes;
 
     }
 

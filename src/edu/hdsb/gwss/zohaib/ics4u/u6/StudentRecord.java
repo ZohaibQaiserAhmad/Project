@@ -14,15 +14,17 @@ public class StudentRecord {
     //Variable(s)
     //String(s)
     private String name;
+
     private String courseTitle;
 
     //Int(s)
     private int grade;
-    private int studentID;
     private int average;
+    private int FILESIZE;
 
     //Double(s)
     private double weight;
+     private double studentID;
 
     //Char(s)
     private char gender;
@@ -33,17 +35,26 @@ public class StudentRecord {
     //Constants  (for first name and last name)
     private static final int MINIMUM_CHARACTERS = 0;
     private static final int MAXIMUM_CHARACTERS = 15;
-    
+
     //For grades
     private static final int MINIMUM_GRADE = 9;
     private static final int MAXIMUM_GRADE = 12;
-    
+
     //For Course lengths
     private static final int MINIMUM_COURSE = 5;
     private static final int MAXIMUM_COURSE = 6;
-    
-    //For student id
-    private static final int ID_LENGTH = 9;
+
+    //For Average
+    private static final int MINIMUM_AVERAGE = 0;
+    private static final int MAXIMUM_AVERAGE = 100;
+
+    //For weight (in lbs)
+    private static final int MINIMUM_WEIGHT = 85;
+    private static final int MAXIMUM_WEIGHT = 130;
+
+    //For Gender (m/f)
+    private static final char MALE = 'M';
+    private static final char FEMALE = 'F';
 
     //Constructor (#1) : custom allows all information to be inputed (advanced)
     //: will be used to set other constructors
@@ -126,44 +137,80 @@ public class StudentRecord {
         }
     }
 
-    public int getStudentID() {
+    //Returns student id if the requirements are met
+    public double getStudentID() {
         return studentID;
     }
 
-    public void setStudentID(int studentID) {
-        this.studentID = studentID;
+    //Sets student id if student id divided by filesize is 0 - basically student id can't be greater then filesize
+    public void setStudentID(double studentID) {
+
+        if (studentID / FILESIZE == 0) {
+            this.studentID = studentID;
+        }
     }
 
+    //returns average if requirements are met 
     public int getAverage() {
         return average;
     }
 
     public void setAverage(int average) {
-        this.average = average;
+
+        //Set average if it is greater then and equal to min and less then or equal to max
+        if (average >= MINIMUM_AVERAGE && average <= MAXIMUM_AVERAGE) {
+            this.average = average;
+        }
     }
 
+    //returns weight if requirements are met
     public double getWeight() {
         return weight;
     }
 
+    //Sets weight if requirements are met
     public void setWeight(double weight) {
-        this.weight = weight;
+
+        //IF weight is greater then or equal to min weight or less then or equal to max weight
+        if (weight >= MINIMUM_WEIGHT && weight <= MAXIMUM_WEIGHT) {
+            this.weight = weight;
+        }
     }
 
+    //Returns gender if the requirements are met
     public char getGender() {
         return gender;
     }
 
+    //Sets gender if requirements are met
     public void setGender(char gender) {
-        this.gender = gender;
+
+        //If gender is male or female in upper case set it 
+        if (gender == MALE || gender == FEMALE) {
+            this.gender = gender;
+        }
     }
 
+    //Returns wheter they can graduate if requirements are met 
     public boolean isCanGraduate() {
         return canGraduate;
     }
 
     public void setCanGraduate(boolean canGraduate) {
-        this.canGraduate = canGraduate;
+
+        //If the argument is set to true then they can graduate
+        if (canGraduate == true) {
+            this.canGraduate = canGraduate;
+        }
+    }
+
+    //String method that converts it to string
+    @Override
+    public String toString() {
+        return "StudentRecord{" + "name=" + name + ", courseTitle="
+                + courseTitle + ", grade=" + grade + ", studentID=" + studentID
+                + ", average=" + average + ", weight=" + weight + ", gender="
+                + gender + ", canGraduate=" + canGraduate + '}';
     }
 
 }

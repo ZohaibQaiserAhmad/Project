@@ -71,16 +71,20 @@ public class StackTester {
         System.out.println("----------Tester for pop------------");
         
         //1)stack with size of 0
-        System.out.println("Empty (pop) - The new top is : " + stackz.pop() + "\n" );
+        stackz.pop();
+        System.out.println("Empty (pop) - The new top is : " + stackz.top() + "\n" );
         
         //2)(Semi-Full) - pop
-        System.out.println("Semi - Full (Pop) - The new top is : " + stackr.pop() + "\n" );
+        stackr.pop();
+        System.out.println("Semi - Full (Pop) - The new top is : " + stackr.top() + "\n" );
         
         //3) Default size Constructor - pop
-        System.out.println("Default Constructor (Pop) - The new top is :  " + defaults.pop() + "\n" );
+        defaults.pop();
+        System.out.println("Default Constructor (Pop) - The new top is :  " + defaults.top() + "\n" );
         
         //4) Full -  pop
-        System.out.println( "Full Size (pop) - The new top is: " + stacks.pop() );
+        stacks.pop();
+        System.out.println( "Full Size (pop) - The new top is: " + stacks.top() );
         
         //Tester for Push
          System.out.println("----------Tester for push------------");

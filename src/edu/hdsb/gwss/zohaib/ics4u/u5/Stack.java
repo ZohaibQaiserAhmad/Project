@@ -77,10 +77,8 @@ public class Stack implements StackInterface {
             //Else subtract one from top which basically removes the previous top value 
         } else {
 
-            top--;
-
             //returns array with new top value
-            return data[top];
+            return data[top--];
 
         }
 
