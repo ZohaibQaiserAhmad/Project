@@ -10,6 +10,10 @@ package edu.hdsb.gwss.zohaib.ics4u.u6;
  * @author 1ahmadzoh
  */
 public class StudentRecord {
+    
+    
+    //File Size
+    protected final int FILE_SIZE = 69;
 
     //Variable(s)
     //String(s)
@@ -20,7 +24,7 @@ public class StudentRecord {
     //Int(s)
     private int grade;
     private int average;
-    private int FILESIZE;
+   
 
     //Double(s)
     private double weight;
@@ -145,7 +149,7 @@ public class StudentRecord {
     //Sets student id if student id divided by filesize is 0 - basically student id can't be greater then filesize
     public void setStudentID(double studentID) {
 
-        if (studentID / FILESIZE == 0) {
+        if (studentID / FILE_SIZE == 0) {
             this.studentID = studentID;
         }
     }
