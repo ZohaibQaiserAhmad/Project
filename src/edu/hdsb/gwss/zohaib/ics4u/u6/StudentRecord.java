@@ -10,8 +10,7 @@ package edu.hdsb.gwss.zohaib.ics4u.u6;
  * @author 1ahmadzoh
  */
 public class StudentRecord {
-    
-    
+
     //File Size
     protected final int FILE_SIZE = 69;
 
@@ -24,11 +23,11 @@ public class StudentRecord {
     //Int(s)
     private int grade;
     private int average;
-   
+    private int dbID;
 
     //Double(s)
     private double weight;
-     private double studentID;
+    private double studentID;
 
     //Char(s)
     private char gender;
@@ -36,8 +35,8 @@ public class StudentRecord {
     //boolean(s)
     private boolean canGraduate;
 
-    //Constants  (for first name and last name)
-    private static final int MINIMUM_CHARACTERS = 0;
+    //Constants 
+    //For name
     private static final int MAXIMUM_CHARACTERS = 15;
 
     //For grades
@@ -45,7 +44,6 @@ public class StudentRecord {
     private static final int MAXIMUM_GRADE = 12;
 
     //For Course lengths
-    private static final int MINIMUM_COURSE = 5;
     private static final int MAXIMUM_COURSE = 6;
 
     //For Average
@@ -65,22 +63,22 @@ public class StudentRecord {
     public StudentRecord(String name, String courseTitle, int grade, int studentID, int average, double weight, char gender, boolean canGraduate) {
 
         //Name and course titles both strings set to argument of constructor
-        this.name = name;
-        this.courseTitle = courseTitle;
+        setName(name);
+        setCourseTitle(courseTitle);
 
         //Grade , student id and average all ints set to argument of constructor
-        this.grade = grade;
-        this.studentID = studentID;
-        this.average = average;
+        setGrade(grade);
+        setStudentID(studentID);
+        setAverage(average);
 
         //Weight is a double of which is set to argument of constructor
-        this.weight = weight;
+        setWeight(weight);
 
         //Gender is a char that is set to argument of constructor
-        this.gender = gender;
+        setGender(gender);
 
         //Can graduate is set to argument of constructor
-        this.canGraduate = canGraduate;
+        setCanGraduate(canGraduate);
     }
 
     //Default Constructor (#2) when no argument is passed into method
@@ -96,6 +94,14 @@ public class StudentRecord {
         this(null, null, 0, studentID, 0, 0.0, (char) 0, false);
     }
 
+    public int getDbID() {
+        return dbID;
+    }
+
+    public void setDbID(int dbID) {
+        this.dbID = dbID;
+    }
+
     //Getter for Name (returns name if its set properly)
     public String getName() {
 
@@ -105,12 +111,17 @@ public class StudentRecord {
 
     public void setName(String name) {
 
-        //if name length is greater to min or less then or equal to maximum
-        if (name.length() > MINIMUM_CHARACTERS && name.length() <= MAXIMUM_CHARACTERS) {
+        StringBuilder temp = new StringBuilder();
 
-            this.name = name;
-
+        if (name != null) {
+            temp.append(name.trim());
+        } else {
+            temp.append("TBD");
         }
+
+        // trucates or pads the string
+        temp.setLength(MAXIMUM_CHARACTERS);
+        this.name = temp.toString();
     }
 
     //returns course title if it is set properly
@@ -121,10 +132,17 @@ public class StudentRecord {
     //Sets course title if it
     public void setCourseTitle(String courseTitle) {
 
-        //If course title is less then or equal to max (5) or greater then or equal to min(6)
-        if (courseTitle.length() <= MINIMUM_COURSE && courseTitle.length() >= MAXIMUM_COURSE) {
-            this.courseTitle = courseTitle;
+          StringBuilder temp = new StringBuilder();
+
+        if (courseTitle != null) {
+            temp.append(courseTitle.trim());
+        } else {
+            temp.append("TBD");
         }
+
+        // trucates or pads the string
+        temp.setLength(MAXIMUM_COURSE);
+        this.courseTitle = temp.toString();
     }
 
     //Returns name only if it meets requirement

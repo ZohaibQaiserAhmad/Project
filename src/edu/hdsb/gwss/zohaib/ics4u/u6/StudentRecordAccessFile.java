@@ -61,27 +61,52 @@ public class StudentRecordAccessFile {
         //can graduate - true
         StudentRecord studentEight = new StudentRecord("Ella", "Advanced Functions", 12, 7346850, 95, 160, 'F', true);
 
-        //Creates Scanner of which will be used to read input
-        Scanner input = new Scanner(System.in);
 
-        //Tells User to type in lower case
-        System.out.println("-------In lower Case answer the following questions------");
-
-        //Asks user of which student data they want to modify
-        System.out.println("Which student data would you like to modify (1 - 8) : ");
-        int choice = input.nextInt();
         
-   
+        Database db = new Database();
+        
+        //Saves All the students recorded so far
+        db.save( studentOne );
+        db.save( studentTwo );
+        db.save(studentThree);
+        db.save(studentFour);
+        db.save(studentFive);
+        db.save(studentSix);
+        db.save(studentSeven);
+        db.save(studentEight);
+        
 
-        //Changing Name
-        System.out.println("Enter [new name] or [k]eep current name ([k]/[new name]) : ");
-        String name = input.nextLine();
-
-        //If the user chooses to not keep name change the record(modify) for new name
-        if (!"k".equals(name)) {
-
-            //Sets the new name in file
-        }
+        db.close();
+        
+//
+//        //Creates a file
+//       StudentRecordAccessFile file = new StudentRecordAccessFile();
+//        
+//        
+//        
+//        //Creates Scanner of which will be used to read input
+//        Scanner input = new Scanner(System.in);
+//
+//        //Tells User to type in lower case
+//        System.out.println("-------In lower Case answer the following questions------");
+//
+//        //Asks user of which student data they want to modify
+//        System.out.println("Which student data would you like to modify (1 - sizeofclass) : ");
+//        int choice = input.nextInt();
+//        
+//        if(choice == 0 || choice <=)
+//        
+//   
+//
+//        //Changing Name
+//        System.out.println("Enter [new name] or [k]eep current name ([k]/[new name]) : ");
+//        String name = input.nextLine();
+//
+//        //If the user chooses to not keep name change the record(modify) for new name
+//        if (!"k".equals(name)) {
+//
+//            //Sets the new name in file
+//        }
 
     }
 
