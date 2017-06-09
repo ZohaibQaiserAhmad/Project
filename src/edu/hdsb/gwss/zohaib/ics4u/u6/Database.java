@@ -68,7 +68,7 @@ public class Database {
             this.raf.writeInt(s.getAverage());
             
             //Writes coursetitle
-            this.raf.writeChars(raf.length());
+            this.raf.writeChars(s.getCourseTitle());
         
             
             System.out.println(this.raf.length() );
