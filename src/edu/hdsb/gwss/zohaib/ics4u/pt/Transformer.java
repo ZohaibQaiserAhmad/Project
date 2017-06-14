@@ -1,9 +1,9 @@
 /*
  +* Name: Zohaib Ahmad
  
- + * Date : Tuesday , June 13 , 2017
+ + * Date : Wednesday , June 14 , 2017
  
- + * Version : v0.01
+ + * Version : v0.02
 
  + * Description : Final performance task (transformer) : adds basics of photoshop
 through methods
@@ -15,8 +15,11 @@ import becker.xtras.imageTransformation.ITransformations;
 
 public class Transformer extends Object implements ITransformations {
 
-    public static final int MIN_NUM_TRANS = 1;
+    public static final int MIN_NUM_TRANS = 6;
     public static final String DARKEN = "Darken";
+    public static final String FLIPX = "flipX";
+    public static final String FLIPY = "flipY";
+    public static final String INVERT = "invert";
     private String[] transformations;
     private static final int MAX_INTENSITY = 255;   // the value for pure white
     private static final int MIN_INTENSITY = 0;     // the value for pure black
@@ -32,6 +35,10 @@ public class Transformer extends Object implements ITransformations {
         super();
         this.transformations = new String[MIN_NUM_TRANS];
         this.transformations[0] = DARKEN;
+        this.transformations[1] = FLIPX;
+        this.transformations[2] = FLIPY;
+        this.transformations[3] = INVERT;
+
     }
 
     /**
@@ -53,7 +60,7 @@ public class Transformer extends Object implements ITransformations {
      */
     @Override
     public int[][] getPixels() {
-        return this.picture;
+        return ((this.picture));
     }
 
     /**
@@ -103,6 +110,18 @@ public class Transformer extends Object implements ITransformations {
 
         if (DARKEN.equals(transformationName)) {
             this.picture = changeIntensity(this.picture, -1 * INTENSITY_STEP);
+        } else if (FLIPX.equals(transformationName)) {
+
+            this.picture = flipX(this.picture);
+
+        } else if (FLIPY.equals(transformationName)) {
+
+            this.picture = flipY(this.picture);
+
+        } else if (INVERT.equals(transformationName)) {
+
+            this.picture = invert(this.picture);
+
         } else {
             throw new Error("Invalid transformation requested.");
         }
@@ -148,7 +167,6 @@ public class Transformer extends Object implements ITransformations {
      * Darken or Brighten based on the step size.
      *
      */
-    
     //Method that changes (bright/dark) based on stepsize
     private int[][] changeIntensity(int[][] sourcePixels, int stepSize) {
 
@@ -200,25 +218,103 @@ public class Transformer extends Object implements ITransformations {
     /**
      * TODO: ICS4U PERFORMANCE TASK
      */
+    //Method to invert the picture
     private int[][] invert(int[][] sourcePixels) {
         // TO DO
-        return new int[1][1];
+
+        //Gets the dimensions of a (argument)
+        //Column size
+        int Column = sourcePixels.length;
+
+        //Row size
+        int Row = sourcePixels[0].length;
+
+        //Copies the array
+        int[][] copyArray = copyArray(sourcePixels);
+
+        //For loop to iterate through the array in sequential order
+        //Iterates through the columns
+        for (int r = 0; r < Row; r++) {
+
+            //Iterates through the rows
+            for (int c = 0; c < Column; c++) {
+
+                //Goes reverse for column and row
+                copyArray[c][r] = sourcePixels[sourcePixels.length - 1 - c][Row - 1 - r];
+
+            }
+
+        }
+
+        return copyArray;
     }
 
     /**
      * TODO: ICS4U PERFORMANCE TASK
      */
+    //Method to flip the picture across the x axis
     private int[][] flipX(int[][] sourcePixels) {
         // TO DO
-        return new int[1][1];
+
+        //Gets the dimensions of a (argument)
+        //Column size
+        int Column = sourcePixels.length;
+
+        //Row size
+        int Row = sourcePixels[0].length;
+
+        //Copies the array
+        int[][] copyArray = copyArray(sourcePixels);
+
+        //For loop to iterate through the array in sequential order
+        //Iterates through the columns
+        for (int r = 0; r < Row; r++) {
+
+            //Iterates through the rows
+            for (int c = 0; c < Column; c++) {
+
+                //Goes reverse for column
+                copyArray[c][r] = sourcePixels[c][Row - 1 - r];
+
+            }
+
+        }
+
+        return copyArray;
     }
 
     /**
      * TODO: ICS4U PERFORMANCE TASK
      */
+    //Method to flip the picture across the y axis 
     private int[][] flipY(int[][] sourcePixels) {
         // TO DO
-        return new int[1][1];
+
+        //Gets the dimensions of a (argument)
+        //Column size
+        int Column = sourcePixels.length;
+
+        //Row size
+        int Row = sourcePixels[0].length;
+
+        //Copies the array
+        int[][] copyArray = copyArray(sourcePixels);
+
+        //For loop to iterate through the array in sequential order
+        //Iterates through the columns
+        for (int r = 0; r < Row; r++) {
+
+            //Iterates through the rows
+            for (int c = 0; c < Column; c++) {
+
+                //Goes reverse for row
+                copyArray[c][r] = sourcePixels[sourcePixels.length - 1 - c][r];
+
+            }
+
+        }
+
+        return copyArray;
     }
 
     /**
@@ -279,10 +375,10 @@ public class Transformer extends Object implements ITransformations {
         System.out.println("Original\n");
         display(myPicture);
 //
-////       Test flip on X-axis
-//        System.out.println( "\nFlipped on the X axis.\n" );
-//        test.performTransformation( FLIPX );
-//        display( test.getPixels() );
+        //Test flip on X-axis
+        System.out.println("\nFlipped on the X axis.\n");
+        test.performTransformation(FLIPX);
+        display(test.getPixels());
 //
 ////       Test flip on Y-axis
 //        System.out.println( "\nFlipped on the Y axis.\n" );
