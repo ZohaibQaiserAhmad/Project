@@ -20,6 +20,8 @@ public class Transformer extends Object implements ITransformations {
     public static final String FLIPX = "flipX";
     public static final String FLIPY = "flipY";
     public static final String INVERT = "invert";
+    public static final String ROTATE = "rotate 90 degrees right";
+    public static final String MIRROR = "mirror across y axis";
     private String[] transformations;
     private static final int MAX_INTENSITY = 255;   // the value for pure white
     private static final int MIN_INTENSITY = 0;     // the value for pure black
@@ -38,6 +40,8 @@ public class Transformer extends Object implements ITransformations {
         this.transformations[1] = FLIPX;
         this.transformations[2] = FLIPY;
         this.transformations[3] = INVERT;
+        this.transformations[4] = ROTATE;
+        this.transformations[5] = MIRROR;
 
     }
 
@@ -121,6 +125,14 @@ public class Transformer extends Object implements ITransformations {
         } else if (INVERT.equals(transformationName)) {
 
             this.picture = invert(this.picture);
+
+        } else if (ROTATE.equals(transformationName)) {
+
+            this.picture = rotate(this.picture);
+
+        } else if (MIRROR.equals(transformationName)) {
+
+            this.picture = mirror(this.picture);
 
         } else {
             throw new Error("Invalid transformation requested.");
@@ -320,17 +332,67 @@ public class Transformer extends Object implements ITransformations {
     /**
      * TODO: ICS4U PERFORMANCE TASK
      */
+    //Method to rotate right (90 degrees)
     private int[][] rotate(int[][] sourcePixels) {
+
         // TO DO
-        return new int[1][1];
+        //Gets the dimensions of a (argument)
+        //Column size
+        int Column = sourcePixels.length;
+
+        //Row size
+        int Row = sourcePixels[0].length;
+
+        //For loop to iterate through the array in sequential order
+        //Iterates through the columns
+        for (int r = 0; r < Row; r++) {
+
+            //Iterates through the rows
+            for (int c = 0; c < Column; c++) {
+
+                //rotates each pixel
+                if (r > 0 && r < sourcePixels.length - 1) {
+                    sourcePixels[c][r] = sourcePixels[r - 1][c + 1];
+                }
+            }
+
+        }
+
+        return sourcePixels;
     }
 
     /**
      * TODO: ICS4U PERFORMANCE TASK
      */
+//Mirror across y axis
     private int[][] mirror(int[][] sourcePixels) {
+
         // TO DO
-        return new int[1][1];
+        //Gets the dimensions of a (argument)
+        //Column size
+        int Row = sourcePixels.length;
+
+        //Row size
+        int Column = sourcePixels[0].length;
+
+        //Doubles the size of picture (y range) to mirror
+        int[][] canvas = new int[Row * 2][Column];
+
+        //For loop to iterate through the array in sequential order
+        //expands the picture (row) to mirror
+        for (int r = 0; r < Row; r++) {
+
+            //Expands the picture (column) to mirror
+            for (int c = 0; c < Column; c++) {
+
+                canvas[r][c] = sourcePixels[r][c];
+                canvas[canvas.length - r - 1][c] = sourcePixels[r][c];
+
+            }
+
+        }
+
+        return canvas;
     }
 
     /**
@@ -380,25 +442,25 @@ public class Transformer extends Object implements ITransformations {
         test.performTransformation(FLIPX);
         display(test.getPixels());
 //
-////       Test flip on Y-axis
-//        System.out.println( "\nFlipped on the Y axis.\n" );
-//        test.performTransformation( FLIPY );
-//        display( test.getPixels() );
+//       Test flip on Y-axis
+        System.out.println("\nFlipped on the Y axis.\n");
+        test.performTransformation(FLIPY);
+        display(test.getPixels());
 //
 ////       Test Rotate 90 degrees
-//        System.out.println( "\nRotated 90 degrees.\n" );
-//        test.performTransformation( ROTATE );
-//        display( test.getPixels() );
+        System.out.println("\nRotated 90 degrees.\n");
+        test.performTransformation(ROTATE);
+        display(test.getPixels());
 //
 ////       Test Rotate Scale 50%
 //        System.out.println( "\nScaled 50%.\n" );
 //        test.performTransformation( SCALE50 );
 //        display( test.getPixels() );
 //
-////       Test Mirror Image
-//        System.out.println( "\nMirror image.\n" );
-//        test.performTransformation( MIRROR );
-//        display( test.getPixels() );
+//       Test Mirror Image
+        System.out.println("\nMirror image.\n");
+        test.performTransformation(MIRROR);
+        display(test.getPixels());
 //
 ////       Test Reset
 //        System.out.println( "\nReset image.\n" );
