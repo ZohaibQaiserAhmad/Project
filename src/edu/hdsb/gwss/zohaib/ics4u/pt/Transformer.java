@@ -12,16 +12,25 @@ through methods
 package edu.hdsb.gwss.zohaib.ics4u.pt;
 
 import becker.xtras.imageTransformation.ITransformations;
+import java.util.Stack;
 
 public class Transformer extends Object implements ITransformations {
 
-    public static final int MIN_NUM_TRANS = 6;
+    public static final int MIN_NUM_TRANS = 10;
     public static final String DARKEN = "Darken";
     public static final String FLIPX = "flipX";
     public static final String FLIPY = "flipY";
     public static final String INVERT = "invert";
     public static final String ROTATE = "rotate 90 degrees right";
     public static final String MIRROR = "mirror across y axis";
+    private static final String SCALE50 = "Scale 50 %";
+    private static final String BLUR = "Blur";
+    private static final String RESET = "Reset";
+    private static final String UNDO = "Undo";
+
+    //Creates stack to hold transformations
+    Stack transformation = new Stack();
+
     private String[] transformations;
     private static final int MAX_INTENSITY = 255;   // the value for pure white
     private static final int MIN_INTENSITY = 0;     // the value for pure black
@@ -35,6 +44,7 @@ public class Transformer extends Object implements ITransformations {
      */
     public Transformer() {
         super();
+
         this.transformations = new String[MIN_NUM_TRANS];
         this.transformations[0] = DARKEN;
         this.transformations[1] = FLIPX;
@@ -42,6 +52,10 @@ public class Transformer extends Object implements ITransformations {
         this.transformations[3] = INVERT;
         this.transformations[4] = ROTATE;
         this.transformations[5] = MIRROR;
+        this.transformations[6] = SCALE50;
+        this.transformations[7] = BLUR;
+        this.transformations[8] = RESET;
+        this.transformations[9] = UNDO;
 
     }
 
@@ -113,26 +127,44 @@ public class Transformer extends Object implements ITransformations {
     public void performTransformation(String transformationName) {
 
         if (DARKEN.equals(transformationName)) {
+            transformation.push(copyArray(this.picture));
             this.picture = changeIntensity(this.picture, -1 * INTENSITY_STEP);
-        } else if (FLIPX.equals(transformationName)) {
 
+        } else if (FLIPX.equals(transformationName)) {
+            transformation.push(copyArray(this.picture));
             this.picture = flipX(this.picture);
 
         } else if (FLIPY.equals(transformationName)) {
-
+            transformation.push(copyArray(this.picture));
             this.picture = flipY(this.picture);
 
         } else if (INVERT.equals(transformationName)) {
-
+            transformation.push(copyArray(this.picture));
             this.picture = invert(this.picture);
 
         } else if (ROTATE.equals(transformationName)) {
-
+            transformation.push(copyArray(this.picture));
             this.picture = rotate(this.picture);
 
         } else if (MIRROR.equals(transformationName)) {
-
+            transformation.push(copyArray(this.picture));
             this.picture = mirror(this.picture);
+
+        } else if (BLUR.equals(transformationName)) {
+            transformation.push(copyArray(this.picture));
+            this.picture = blur(this.picture);
+
+        } else if (SCALE50.equals(transformationName)) {
+            transformation.push(copyArray(this.picture));
+            this.picture = scale50(this.picture);
+
+        } else if (RESET.equals(transformationName)) {
+
+            this.picture = copyArray(this.pictureOriginal);
+
+        } else if (UNDO.equals(transformationName)) {
+
+            this.picture = undo();
 
         } else {
             throw new Error("Invalid transformation requested.");
@@ -399,16 +431,104 @@ public class Transformer extends Object implements ITransformations {
      * TODO: ICS4U PERFORMANCE TASK
      */
     private int[][] scale50(int[][] sourcePixels) {
-        // TO DO
-        return new int[1][1];
+
+         // TO DO
+        //Gets the dimensions of a (argument)
+        //Column size
+        int Row = sourcePixels.length;
+
+        //Row size
+        int Column = sourcePixels[0].length;
+
+        //Doubles the size of picture (y range) to mirror
+        int[][] canvas = new int[Row * 2][Column * 2];
+
+        //For loop to iterate through the array in sequential order
+        //expands the picture (row) to mirror
+        for (int r = 0; r < Row; r++) {
+
+            //Expands the picture (column) to mirror
+            for (int c = 0; c < Column; c++) {
+
+                canvas[r*2][c*2] = sourcePixels[r][c];
+                
+
+            }
+
+        }
+
+        return canvas;
     }
 
     /**
      * TODO: ICS4U PERFORMANCE TASK
      */
     private int[][] blur(int[][] sourcePixels) {
+
         // TO DO
-        return new int[1][1];
+        //Gets the dimensions of a (argument)
+        //Column size
+        int Row = sourcePixels.length;
+
+        //Row size
+        int Column = sourcePixels[0].length;
+
+        int averageValue = 0;
+
+        //For loop to iterate through the array in sequential order
+        //expands the picture (row) to mirror
+        for (int r = 0; r < Row; r++) {
+
+            //Expands the picture (column) to mirror
+            for (int c = 1; c < Column - 1; c++) {
+
+                //Exceptions to getting average r == 0 , length - 1 - row etc
+                if (r == 0) {
+
+                    //Gets the average of the values surounding the pixels
+                    averageValue = (sourcePixels[r + 1][c] + sourcePixels[r][c + 1] + sourcePixels[r][c - 1]) / 3;
+
+                    //Sets pixel to average value
+                    sourcePixels[r][c] = averageValue;
+
+                } else if (r == Row - 1) {
+
+                    //Gets the average of the values surounding the pixels
+                    averageValue = (sourcePixels[r][c + 1] + sourcePixels[r - 1][c] + sourcePixels[r][c - 1]) / 3;
+
+                    //Sets pixel to average value
+                    sourcePixels[r][c] = averageValue;
+
+                    //Gets the average of the values surounding the pixels   
+                } else {
+                    averageValue = (sourcePixels[r + 1][c] + sourcePixels[r][c + 1] + sourcePixels[r - 1][c] + sourcePixels[r][c - 1]) / 4;
+                }
+
+                //Sets pixel to average value
+                sourcePixels[r][c] = averageValue;
+
+            }
+        }
+
+        //Returns blurred version
+        return sourcePixels;
+    }
+
+//Reset method
+    private int[][] reset(int[][] sourcePixels) {
+
+        //Returns original and sets it to sourcePixels resetting everything
+        sourcePixels = pictureOriginal;
+        return sourcePixels;
+
+    }
+
+    //Undo Method
+    private int[][] undo() {
+
+        this.picture = (int[][]) transformation.pop();
+        return this.picture;
+
     }
 
     /**
@@ -452,20 +572,20 @@ public class Transformer extends Object implements ITransformations {
         test.performTransformation(ROTATE);
         display(test.getPixels());
 //
-////       Test Rotate Scale 50%
-//        System.out.println( "\nScaled 50%.\n" );
-//        test.performTransformation( SCALE50 );
-//        display( test.getPixels() );
+//       Test Rotate Scale 50%
+        System.out.println( "\nScaled 50%.\n" );
+        test.performTransformation( SCALE50 );
+        display( test.getPixels() );
 //
 //       Test Mirror Image
         System.out.println("\nMirror image.\n");
         test.performTransformation(MIRROR);
         display(test.getPixels());
 //
-////       Test Reset
-//        System.out.println( "\nReset image.\n" );
-//        test.performTransformation( RESET );
-//        display( test.getPixels() );
+//       Test Reset
+        System.out.println("\nReset image.\n");
+        test.performTransformation(RESET);
+        display(test.getPixels());
 
     }
 
